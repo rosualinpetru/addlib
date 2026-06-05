@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+site_name: addlib
+site_description: Checked integer & float addition with a C core, exposed to Python via CFFI.
+site_url: https://rosualinpetru.github.io/addlib
+repo_url: https://github.com/rosualinpetru/addlib
+repo_name: rosualinpetru/addlib
+edit_uri: edit/main/docs/
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [python/src]
+          options:
+            docstring_style: google
+            show_root_heading: true
+            show_source: true
+            separate_signature: true
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
+
+nav:
+  - Home: index.md
+  - Tutorials:
+      - Getting started: tutorials/getting-started.md
+  - How-to guides:
+      - Handle overflow safely: how-to/handling-overflow.md
+      - Use libadd from C/C++: how-to/use-libadd-from-c.md
+  - Reference:
+      - Python API: reference/python-api.md
+      - C API: reference/c-api.md
+  - Explanation:
+      - Design document: explanation/design.md
+      - Security model: explanation/security-model.md
+      - Testing strategy: explanation/testing.md
+      - Versioning policy: explanation/versioning.md
+      - Releasing: explanation/releasing.md
+      - Disclosure runbook: explanation/disclosure-runbook.md
+      - Anti-patterns: explanation/anti-patterns.md
+      - Maintenance & sustainability: explanation/maintenance.md
+  - Decisions (ADRs):
+      - Overview: adr/README.md
+      - ADR-0001 License (Apache-2.0): adr/0001-license-apache-2.0.md
+      - ADR-0002 CFFI binding: adr/0002-cffi-binding.md
+      - ADR-0003 Monorepo / artifacts: adr/0003-monorepo-two-artifacts.md
+      - ADR-0004 Build backend: adr/0004-build-backend.md
+  - Roadmap mapping: ROADMAP.md
+  - Changelog: changelog.md
