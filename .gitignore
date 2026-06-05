@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# Virtual envs
+.venv/
+venv/
+
+# CFFI-generated sources/extensions
+python/src/addlib/_add_cffi*
+*.so
+*.dylib
+*.dll
+*.o
+*.obj
+
+# Builds / dists
+/build/
+/dist/
+/site/
+*.whl
+*.tar.gz
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
