@@ -3,7 +3,7 @@
 graft c
 graft python/src
 
-include LICENSE NOTICE README.md CHANGELOG.md
+include LICENSE NOTICE README.md CHANGELOG.md VERSION
 include pyproject.toml setup.py
 include CMakeLists.txt
 

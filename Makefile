@@ -7,7 +7,7 @@ BUILD   ?= build
 
 .DEFAULT_GOAL := help
 
-.PHONY: help dev test test-py test-c lint fmt bench fuzz docs serve-docs wheel sdist clean
+.PHONY: help dev test test-py test-c lint fmt bench fuzz docs serve-docs wheel sdist bump changelog clean
 
 # Apple's clang lacks the libFuzzer runtime; on macOS use Homebrew LLVM:
 #   make fuzz FUZZ_CC="$$(brew --prefix llvm)/bin/clang"
@@ -69,6 +69,21 @@ wheel: ## Build a wheel for the current platform
 
 sdist: ## Build a source distribution
 	$(VENV_PY) -m build --sdist
+
+bump: ## Set the version everywhere (usage: make bump V=0.2.0)
+	@test -n "$(V)" || { echo "usage: make bump V=X.Y.Z"; exit 1; }
+	@printf '%s\n' "$(V)" > VERSION
+	@maj=$$(echo "$(V)" | cut -d. -f1); min=$$(echo "$(V)" | cut -d. -f2); pat=$$(echo "$(V)" | cut -d. -f3); \
+		sed -i.bak -E \
+			-e "s/(ADDLIB_VERSION_MAJOR )[0-9]+/\1$$maj/" \
+			-e "s/(ADDLIB_VERSION_MINOR )[0-9]+/\1$$min/" \
+			-e "s/(ADDLIB_VERSION_PATCH )[0-9]+/\1$$pat/" \
+			-e "s/(ADDLIB_VERSION_STRING )\"[^\"]*\"/\1\"$(V)\"/" \
+			c/include/add/add.h && rm -f c/include/add/add.h.bak
+	@echo "bumped to $(V) — updated VERSION and c/include/add/add.h (a test guards they agree)"
+
+changelog: ## Regenerate CHANGELOG.md from Conventional Commits (git-cliff)
+	$(VENV)/bin/git-cliff --output CHANGELOG.md
 
 clean: ## Remove build artifacts
 	rm -rf $(BUILD) dist *.egg-info python/src/*.egg-info site .pytest_cache .mypy_cache .ruff_cache

@@ -37,4 +37,8 @@ def test_direct_abi_overflow_leaves_out_untouched() -> None:
 
 
 def test_version_symbol() -> None:
-    assert ffi.string(lib.add_version()) == b"0.1.1"
+    # The C core reports a MAJOR.MINOR.PATCH string; don't hardcode the value
+    # (test_version_consistency checks it matches the package version).
+    v = ffi.string(lib.add_version()).decode("ascii")
+    parts = v.split(".")
+    assert len(parts) == 3 and all(p.isdigit() for p in parts), v

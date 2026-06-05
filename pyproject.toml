@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "addlib"
-version = "0.1.1"
+dynamic = ["version"] # single source of truth: the top-level VERSION file
 description = "Checked integer & float addition with a C core, exposed to Python via CFFI."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -43,6 +43,8 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.10",
     "build>=1.2",
+    "pytest-cov>=5",
+    "git-cliff>=2",
     "clang-format==22.1.5",  # pinned so the C format gate is identical in CI and locally
 ]
 docs = [
@@ -61,6 +63,11 @@ where = ["python/src"]
 
 [tool.setuptools.package-data]
 addlib = ["py.typed"]
+
+# Single source of truth for the (Python) version: the top-level VERSION file.
+# The C library version lives in c/include/add/add.h; a test asserts they agree.
+[tool.setuptools.dynamic]
+version = { file = "VERSION" }
 
 # --- Tooling -----------------------------------------------------------------
 [tool.ruff]
@@ -96,13 +103,25 @@ markers = [
     "negative: adversarial / must-reject tests (release-blocking)",
 ]
 
+[tool.coverage.run]
+# _build_ffi.py runs at build time, not under the test suite; don't count it.
+omit = ["*/addlib/_build_ffi.py"]
+
 [tool.cibuildwheel]
-# Build for CPython only; skip 32-bit and musllinux to keep the example lean.
+# CPython only; skip 32-bit. We build manylinux + musllinux, x86_64 + aarch64,
+# and macOS arm64 + x86_64 (see the platform sections below).
 build = "cp310-* cp311-* cp312-* cp313-* cp314-*"
-skip = ["*-win32", "*_i686", "*-musllinux*"]
+skip = ["*-win32", "*_i686", "*-musllinux_aarch64"] # musllinux+QEMU aarch64 is too slow
 # Smoke-test every built wheel by importing and adding in a fresh environment.
 test-requires = ["pytest", "hypothesis"]
 test-command = "pytest {project}/python/tests -q"
 build-frontend = "build"
 
-# Linux: cibuildwheel's default manylinux image is used (it includes cp314).
+[tool.cibuildwheel.macos]
+# Build Apple Silicon and Intel wheels (x86_64 is cross-compiled, tested natively only).
+archs = ["arm64", "x86_64"]
+
+[tool.cibuildwheel.linux]
+# x86_64 natively + aarch64 under QEMU (the workflow registers it). The default
+# manylinux image is used (it includes cp314).
+archs = ["x86_64", "aarch64"]

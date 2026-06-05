@@ -1,0 +1,54 @@
+{# conda-forge recipe for addlib (starting point).                              #}
+{# This is NOT auto-submitted: to get on conda-forge you open a PR adding this  #}
+{# recipe to https://github.com/conda-forge/staged-recipes (see recipe/README). #}
+{% set name = "addlib" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  # conda-forge builds from the PyPI sdist. Fill in the sha256 of the published
+  # sdist (shown by `openssl dgst -sha256 dist/addlib-{{ version }}.tar.gz`).
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 0000000000000000000000000000000000000000000000000000000000000000
+
+build:
+  number: 0
+  # Compiled C extension → platform-specific (not noarch).
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - pip
+    - setuptools >=77
+    - cffi >=1.17
+  run:
+    - python
+    - cffi >=1.17
+
+test:
+  imports:
+    - addlib
+  commands:
+    - python -c "import addlib; assert addlib.add(2, 3) == 5"
+
+about:
+  home: https://github.com/rosualinpetru/addlib
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Checked integer & float addition with a C core, exposed to Python via CFFI.
+  description: |
+    A small Python library backed by a C performance core through a CFFI ABI,
+    and a template for building, testing, securing, packaging, and releasing a
+    native (C + Python) open-source library.
+  doc_url: https://rosualinpetru.github.io/addlib
+  dev_url: https://github.com/rosualinpetru/addlib
+
+extra:
+  recipe-maintainers:
+    - rosualinpetru

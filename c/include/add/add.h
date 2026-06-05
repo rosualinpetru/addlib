@@ -25,9 +25,9 @@ extern "C" {
 
 /** Library version, available at compile time for consumers. */
 #define ADDLIB_VERSION_MAJOR 0
-#define ADDLIB_VERSION_MINOR 1
-#define ADDLIB_VERSION_PATCH 1
-#define ADDLIB_VERSION_STRING "0.1.1"
+#define ADDLIB_VERSION_MINOR 2
+#define ADDLIB_VERSION_PATCH 0
+#define ADDLIB_VERSION_STRING "0.2.0"
 
 /**
  * @brief Status codes returned by checked operations.
@@ -81,7 +81,7 @@ double add_f64(double a, double b);
  * The returned pointer has static storage duration; the caller must not free
  * it. Equal to ::ADDLIB_VERSION_STRING for a matching build.
  *
- * @return Version string, e.g. "0.1.1".
+ * @return Version string, e.g. "0.2.0".
  */
 const char *add_version(void);
 
