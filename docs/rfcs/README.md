@@ -1,7 +1,7 @@
 # RFCs (Requests for Comments)
 
 A lightweight design-proposal process for **protocol-level, public-API, or
-breaking changes** (roadmap Phase 7.3). Small fixes and additions don't need an
+breaking changes**. Small fixes and additions don't need an
 RFC — just open a PR. RFCs exist so big decisions are discussed in the open and
 leave a durable rationale trail (which doubles as bus-factor insurance).
 

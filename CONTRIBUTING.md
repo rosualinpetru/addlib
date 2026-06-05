@@ -67,12 +67,11 @@ git config user.name  "Your Name"
 git config user.email "you@example.com"
 ```
 
-We also encourage (and for maintainers, require) **cryptographically signed
-commits** (`git commit -S`) — see [SECURITY.md](SECURITY.md).
+We also encourage (and for maintainers, require) **signed commits** (`git commit -S`) — see [SECURITY.md](SECURITY.md).
 
 ## 4. Tests are required
 
-This is a security-critical-by-example project: changes need tests.
+Changes need tests.
 
 - New behavior → add unit tests and, where applicable, property-based tests.
 - Bug fix → add a regression test that fails before your fix.

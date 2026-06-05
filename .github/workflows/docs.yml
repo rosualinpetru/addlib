@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Build the docs on every PR (strict, so broken links/refs fail), and deploy to
-# GitHub Pages on push to main (Phase 6.3).
+# GitHub Pages on push to main.
 name: Docs
 
 on:

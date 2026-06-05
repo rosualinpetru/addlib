@@ -3,9 +3,8 @@
 """High-level, Pythonic API for :mod:`addlib`.
 
 The arithmetic is performed in C (see ``c/src/add.c``); this module is a thin,
-misuse-resistant wrapper over the CFFI bindings. Design goal (mirroring the
-roadmap's *misuse-resistant API design*): the safe thing is the easy thing, and
-errors are explicit rather than silent.
+misuse-resistant wrapper over the CFFI bindings. Design goal: the safe thing is
+the easy thing, and errors are explicit rather than silent.
 """
 
 from __future__ import annotations
@@ -105,8 +104,7 @@ def add_floats(a: float, b: float) -> float:
     Follows IEEE-754 semantics: ``add_floats(float("inf"), 1.0)`` is ``inf`` and
     NaN propagates; no exception is raised for those. Because the result is
     approximate, callers should compare with a tolerance, not for exact
-    equality — the floating-point analogue of CKKS's approximate arithmetic
-    (see :func:`addlib.testing.approx_equal`).
+    equality (see :func:`addlib.testing.approx_equal`).
 
     Args:
         a: First addend (int or float).

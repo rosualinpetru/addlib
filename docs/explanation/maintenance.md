@@ -57,4 +57,4 @@ only if/when independent co-maintainers materialize and want neutral governance.
 Most of what makes maintenance survivable was front-loaded: tests, fuzzing,
 sanitizers, supply-chain workflows, and written-down decisions all existed before
 the project had more than one function. That is deliberate — see the
-[roadmap mapping](../ROADMAP.md).
+[project tour](../ROADMAP.md).

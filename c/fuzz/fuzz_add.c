@@ -6,8 +6,8 @@
  *   cmake --build build --target fuzz_add
  *   ./build/fuzz_add -max_total_time=60
  *
- * This is the attacker-reachable-input analogue from the roadmap (Phase 3.2):
- * deserialization is where crypto CVEs live, so we fuzz the function that turns
+ * Attacker-controlled input is the obvious attack surface, and deserialization
+ * is where memory-safety bugs live, so we fuzz the function that turns
  * raw bytes into a result, with a differential oracle (128-bit arithmetic that
  * cannot itself overflow) checking that the status and output are always
  * consistent with the true mathematical sum.

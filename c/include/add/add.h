@@ -65,9 +65,9 @@ add_status_t add_i64(int64_t a, int64_t b, int64_t *out);
  * @brief Add two IEEE-754 double-precision floats.
  *
  * Returns @p a + @p b with the platform's default rounding. Follows IEEE-754
- * semantics for infinities and NaN (no exception is raised). Provided as the
- * "approximate arithmetic" analogue to a CKKS-style approximate operation:
- * callers must reason about floating-point error, not exact equality.
+ * semantics for infinities and NaN (no exception is raised). The result is
+ * approximate: callers must reason about floating-point error, not exact
+ * equality.
  *
  * @param a First addend.
  * @param b Second addend.

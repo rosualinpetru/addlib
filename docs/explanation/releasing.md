@@ -1,8 +1,8 @@
 # Releasing
 
-Releases are **tag-triggered and automated** (Phase 5.4). The human does two
+Releases are **tag-triggered and automated**. The human does two
 things: bump the version and push a tag. CI does the rest — build, sign,
-publish — which removes the manual errors that creep into hand-cut crypto-library
+publish — which removes the manual errors that creep into hand-cut native-extension
 releases (forgetting to sign, shipping an unbuilt platform, a mismatched
 changelog).
 

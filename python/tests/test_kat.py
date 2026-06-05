@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 """Known-Answer Tests (KATs): fixed inputs with expected outputs.
 
-The crypto-specific layer ordinary software skips. For a real library these
-would be published vectors; here they pin exact integer sums and document the
-IEEE-754 rounding of specific float sums so a regression is impossible to miss.
+Fixed input/output vectors are an exact-value regression guard: they pin exact
+integer sums and document the IEEE-754 rounding of specific float sums so a
+regression is impossible to miss.
 """
 
 from __future__ import annotations

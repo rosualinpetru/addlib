@@ -1,9 +1,9 @@
 # Anti-patterns (what *not* to do)
 
 For an audience with limited domain expertise, "here is the wrong way" is as
-valuable as the how-to (roadmap Phase 6.2). For a real crypto library this page
-would list parameter choices that silently destroy security. For `addlib` the
-stakes are small, but the habit is the point.
+valuable as the how-to. For a larger library this page would list the sharp
+edges that cause silent wrong results or misuse. For `addlib` the stakes are
+small, but the habit is the point.
 
 ## ❌ Assuming integer addition wraps
 

@@ -5,7 +5,7 @@ example of a *security-critical* library workflow. We therefore maintain a real
 vulnerability-disclosure posture from day one. (See the project's
 [security model](docs/explanation/security-model.md) for what is and is not in
 scope — for a pure addition library the attack surface is small, but the process
-is intentionally identical to what a cryptographic library would use.)
+is intentionally identical to what a larger, security-sensitive library would use.)
 
 ## Reporting a vulnerability
 

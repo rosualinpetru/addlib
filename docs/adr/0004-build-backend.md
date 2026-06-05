@@ -5,7 +5,7 @@
 
 ## Context
 
-Phase 2.2 recommends **scikit-build-core (CMake) + cibuildwheel** as the build
+A common recommendation is **scikit-build-core (CMake) + cibuildwheel** as the build
 backend. Our binding is CFFI (ADR-0002), which generates and compiles its own
 extension module. We need a backend that drives CFFI cleanly and still serves
 C consumers.
@@ -16,7 +16,7 @@ C consumers.
   `cffi_modules` integration (a one-line `setup.py` plus metadata in
   `pyproject.toml`). Wheels are built across platforms with **cibuildwheel**.
 - **Standalone C library**: a full **CMake** build (`CMakeLists.txt`, install,
-  export, pkg-config) — unchanged from the roadmap's intent.
+  export, pkg-config) — unchanged from the usual intent.
 
 ## Rationale
 

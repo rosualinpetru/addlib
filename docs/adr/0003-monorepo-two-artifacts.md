@@ -5,7 +5,7 @@
 
 ## Context
 
-The central structural decision (Phase 1.3): one artifact or many? Options:
+The central structural decision: one artifact or many? Options:
 (A) single Python package, (B) many independent packages, (C) one monorepo
 publishing several artifacts.
 
@@ -26,7 +26,7 @@ the C library out to its own release cadence later without moving code.
   commit) while the design is still moving.
 - One place for issues, CI, and docs; contributors clone once.
 - Preserves the multi-artifact future without paying coordination cost now —
-  the roadmap's recommended starting point.
+  a pragmatic starting point.
 
 ## Consequences
 

@@ -71,5 +71,5 @@ nav:
       - ADR-0002 CFFI binding: adr/0002-cffi-binding.md
       - ADR-0003 Monorepo / artifacts: adr/0003-monorepo-two-artifacts.md
       - ADR-0004 Build backend: adr/0004-build-backend.md
-  - Roadmap mapping: ROADMAP.md
+  - Project tour: ROADMAP.md
   - Changelog: changelog.md

@@ -1,20 +1,14 @@
 # addlib
 
-> **Checked integer & float addition with a C core, exposed to Python via a CFFI ABI.**
+> A small, complete example of a **Python library backed by a C core** through a
+> CFFI ABI — and a **batteries-included template** for building, testing,
+> securing, packaging, and releasing a native (C + Python) open-source library.
 
-`addlib` adds two numbers. That is all it does — on purpose.
-
-It is a **worked, end-to-end example** of the
-VERIFHE open-source library roadmap: a C
-performance core (`libadd`) bound to a Python API (`addlib`) through a CFFI ABI,
-carried through every phase of building a real open-source, security-critical
-library — licensing, governance, CI/CD, a serious test strategy, supply-chain
-security, automated signed releases, documentation, community, and maintenance.
-
-Wherever the real VERIFHE library would have RNS arithmetic, CKKS, PIOPs and a
-SNARK, `addlib` has `add_i64` and `add_f64`. **The shape is faithful; the payload
-is trivial**, so you can read the whole thing in an afternoon and lift the
-scaffolding.
+`addlib` adds two numbers. The functionality is trivial on purpose: the
+**scaffolding is the point**. Clone it, rename it, replace `add` with your real
+performance-critical C, and you start from a clean C/Python boundary, a serious
+test strategy, cross-platform wheels, supply-chain security, and an automated
+signed release.
 
 ## Install
 
@@ -54,7 +48,19 @@ int main(void) {
 cmake -S . -B build && cmake --build build   # builds libadd + CMake/pkg-config
 ```
 
-## Why it's built the way it is
+## What this template gives you
+
+| Area | What's included |
+| --- | --- |
+| **Architecture** | Clean C core (`libadd`) + thin CFFI binding + typed Python API; a documented C ABI as the contract |
+| **Build** | Self-contained wheels (`cibuildwheel`) for Linux/macOS/Windows incl. Python 3.14; standalone CMake build for C consumers |
+| **Testing** | Unit, property-based (Hypothesis), known-answer, adversarial/negative gates, ABI-contract tests; libFuzzer target; benchmarks |
+| **Security** | ASan/UBSan + Valgrind, CodeQL, OpenSSF Scorecard, dependency review, private vuln reporting |
+| **Release** | Tag-driven pipeline: SBOM + SLSA provenance + Sigstore signatures + PyPI Trusted Publishing + signed GitHub Release |
+| **Docs** | MkDocs Material (Diátaxis), auto-generated API reference, runnable examples |
+| **Project** | Apache-2.0, governance, DCO, Code of Conduct, issue/PR templates, RFC process, ADRs |
+
+## Why it's built this way
 
 | Decision | Choice | Rationale |
 | --- | --- | --- |
@@ -84,8 +90,9 @@ addlib/
 ```bash
 make dev      # venv + dev deps + build the extension
 make test     # C tests (CTest) + Python tests (pytest)
-make lint     # ruff, mypy, clang-format/-tidy
+make lint     # ruff, mypy, clang-format
 make bench    # benchmarks
+make fuzz     # libFuzzer (macOS: FUZZ_CC="$(brew --prefix llvm)/bin/clang")
 make docs     # build the documentation site
 ```
 
@@ -98,7 +105,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Contributions are under the
 - **Design document**: [docs/explanation/design.md](docs/explanation/design.md).
 - **Security model & disclosure**: [SECURITY.md](SECURITY.md),
   [docs/explanation/security-model.md](docs/explanation/security-model.md).
-- **How the phases map to a timeline**: [docs/ROADMAP.md](docs/ROADMAP.md).
+- **Project tour**: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Security
 

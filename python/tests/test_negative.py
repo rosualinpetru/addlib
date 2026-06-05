@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 """Adversarial / must-reject tests — the release-blocking gate.
 
-The roadmap's highest-value testing investment for a verifiable-computation
-library is the suite that *tries to make the system accept something it must
-reject*. For addition, "rejection" means: overflow must raise, out-of-range
-inputs must raise, and wrong types must raise — never silently return a wrong
-or wrapped answer. Weakening any of these is treated like shipping a crash.
+A high-value, often-skipped investment is the suite that *tries to make the
+system accept something it must reject*. For addition, "rejection" means:
+overflow must raise, out-of-range inputs must raise, and wrong types must raise
+— never silently return a wrong or wrapped answer. Weakening any of these is
+treated like shipping a crash.
 """
 
 from __future__ import annotations

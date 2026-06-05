@@ -1,7 +1,7 @@
 # Architecture Decision Records
 
 ADRs capture *why* a decision was made, so the rationale outlives the people who
-made it. Per the roadmap's Phase 8.2, these (plus the
+made it. These (plus the
 [design doc](../explanation/design.md)) are treated as release-blocking
 artifacts, not optional docs — they are the project's bus-factor insurance.
 

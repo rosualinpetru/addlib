@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# OpenSSF Scorecard: automated scoring of the repo's security posture (Phase 4.2).
+# OpenSSF Scorecard: automated scoring of the repo's security posture.
 # Publishes results so the score is a public signal and a maintenance checklist.
 name: Scorecard
 

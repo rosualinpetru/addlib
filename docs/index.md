@@ -1,14 +1,13 @@
 # addlib
 
-**Checked integer & float addition with a C core, exposed to Python via a CFFI ABI.**
+**A Python library backed by a C core through a CFFI ABI — and a template for
+building, testing, securing, packaging, and releasing a native (C + Python)
+open-source library.**
 
-`addlib` adds two numbers — on purpose. It is a worked, end-to-end example of the
-VERIFHE open-source library roadmap: a C performance core (`libadd`) bound to a
-Python API (`addlib`) through a CFFI ABI, taken through every phase of building a
-real, security-critical open-source library.
-
-The shape is faithful; the payload is trivial. Read it in an afternoon, lift the
-scaffolding.
+`addlib` adds two numbers. The functionality is trivial on purpose; the
+scaffolding around it is what's worth copying: a clean C/Python boundary, a real
+test strategy, cross-platform wheels, supply-chain security, and an automated
+signed release.
 
 ## 30 seconds
 

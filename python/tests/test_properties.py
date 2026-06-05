@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """Property-based tests (Hypothesis).
 
-The crypto analogue: instead of (or in addition to) fixed vectors, assert
-invariants over a huge input space the fuzzer-style engine explores. Here the
+Instead of (or in addition to) fixed vectors, assert invariants over a huge
+input space that the engine explores. Here the
 "reference implementation" we cross-validate against is Python's own arbitrary-
 precision integer arithmetic.
 """

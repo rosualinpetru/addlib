@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# CodeQL static analysis for the C core and the Python layer (Phase 2.1 / 4.2).
+# CodeQL static analysis for the C core and the Python layer.
 name: CodeQL
 
 on:

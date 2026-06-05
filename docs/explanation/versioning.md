@@ -30,14 +30,14 @@ where breaking changes originate.
    signature) is a MAJOR event for C consumers even if the Python API is
    untouched. This is a dimension Python-only projects never face.
 3. **Wire / serialization format** — *not applicable* to `addlib` (it serializes
-   nothing). Recorded here because the principle matters for the real library: a
-   proof/ciphertext serialized by one version must be verifiable by a compatible
-   one, or the incompatibility must be loud. Version such a format with its own
+   nothing). Recorded here because the principle matters once a library serializes data:
+   anything written by one version must be readable by a compatible one, or the
+   incompatibility must be loud. Version such a format with its own
    explicit number, independent of the code API.
 
 ## Security patches
 
-A fix for a memory-safety or correctness ("soundness") bug ships as a **PATCH**,
+A fix for a memory-safety or correctness bug ships as a **PATCH**,
 is announced via a security advisory, and — once we support older lines — may be
 backported. See the [disclosure runbook](disclosure-runbook.md).
 
@@ -47,8 +47,8 @@ Today we ship effectively one product (the `addlib` wheel bundles the C core),
 so we version **lockstep**: one number, one tag, one changelog. Simple to reason
 about.
 
-If/when `libadd` gains an independent release cadence (ADR-0003), we move to the
-**hybrid** scheme the roadmap recommends:
+If/when `libadd` gains an independent release cadence (ADR-0003), we move to a
+**hybrid** scheme:
 
 - version the stable C library independently (it changes slowly, earns long-lived
   guarantees);

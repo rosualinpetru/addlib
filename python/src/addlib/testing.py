@@ -2,11 +2,9 @@
 # Copyright 2026 Alin-Petru Roșu
 """Comparison helpers for approximate (floating-point) results.
 
-The roadmap's Phase 3.4 ("correctness under approximation") argues for a single,
-well-documented set of tolerance conventions used everywhere, so that "correct"
-has one precise meaning across the test suite. For ``add_floats`` the only
-approximation is IEEE-754 rounding, but we still funnel float comparisons
-through one helper to model the discipline a CKKS-style library would need.
+Funnel all float comparisons through one helper with a single, documented
+tolerance, so that "approximately equal" has one precise meaning across the
+test suite. For ``add_floats`` the only approximation is IEEE-754 rounding.
 """
 
 from __future__ import annotations

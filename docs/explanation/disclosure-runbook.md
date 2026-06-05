@@ -1,7 +1,7 @@
 # Vulnerability disclosure runbook
 
 Write the workflow down *before* you need it — a panic during a live disclosure
-is how mistakes happen (Phase 4.3). This is the maintainer-facing companion to
+is how mistakes happen. This is the maintainer-facing companion to
 the user-facing [SECURITY.md](https://github.com/rosualinpetru/addlib/blob/main/SECURITY.md).
 
 ## Roles

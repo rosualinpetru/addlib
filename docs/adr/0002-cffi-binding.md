@@ -5,7 +5,7 @@
 
 ## Context
 
-The core is pure C. We must choose how Python talks to it (Phase 1.1). Options:
+The core is pure C. We must choose how Python talks to it. Options:
 pybind11, Cython, CFFI, PyO3+Rust, raw CPython API.
 
 ## Decision

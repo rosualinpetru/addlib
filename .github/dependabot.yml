@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Automated dependency-update PRs (Phase 4.2 / Phase 8.1). Every dependency is
+# Automated dependency-update PRs. Every dependency is
 # attack surface; keep the surface small and current.
 version: 2
 updates:

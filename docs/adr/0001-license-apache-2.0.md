@@ -5,7 +5,7 @@
 
 ## Context
 
-We must pick a license before the first public push (Phase 0.1). The candidate
+We must pick a license before the first public push. The candidate
 audience is broad industrial + community adoption. Options considered: MIT,
 Apache-2.0, BSD-3, MPL-2.0, LGPL/GPL.
 
@@ -17,15 +17,15 @@ License the project under **Apache-2.0**.
 
 - Permissive → zero adoption friction; preferred by corporate legal teams.
 - Explicit **patent grant** and retaliation clause — the property MIT/BSD lack,
-  and the reason the roadmap recommends Apache-2.0 for an industry-aimed crypto
-  library. (For an addition library the patent surface is nil, but we follow the
-  recommended default so the example is faithful.)
+  a strong reason to prefer Apache-2.0 for a library aimed at broad industry
+  adoption. (For an addition library the patent surface is nil; we use it as a
+  sensible default for the template.)
 - It is the default foundations (Apache, Linux Foundation, OpenSSF) expect.
 
 ## Alternatives / close call
 
-**Dual MIT OR Apache-2.0** is the de-facto standard in the ZK/crypto ecosystem
-and maximizes compatibility. If `addlib` ever needs to vendor into MIT-only
+**Dual MIT OR Apache-2.0** is common in parts of the ecosystem and maximizes
+compatibility. If `addlib` ever needs to vendor into MIT-only
 ecosystems, revisit with a follow-up ADR. The cost of dual-licensing is only a
 little more LICENSE paperwork.
 

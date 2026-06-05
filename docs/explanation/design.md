@@ -1,31 +1,27 @@
 # Technical Design Document
 
-> This is the Task 1.1 deliverable analogue: a living design document, reviewed
-> like code. It is the home for the C-ABI contract, the module dependency graph,
-> the artifact decision, the stability tiering, and the public-API surface.
+> A living design document, reviewed like code. It is the home for the C-ABI
+> contract, the module dependency graph, the artifact decision, the stability
+> tiering, and the public-API surface.
 
 ## 1. Scope
 
-`addlib` adds two numbers. It exists as a *worked example* of the VERIFHE
-open-source library roadmap: a C performance core exposed to Python through a
-CFFI ABI, carried through every phase (licensing, CI, testing, security,
-release, docs, community, maintenance).
+`addlib` adds two numbers. It exists as a **template and worked example** of a
+Python library with a C performance core exposed through a CFFI ABI, carried
+through the full lifecycle of an open-source native library: licensing, CI,
+testing, security, releasing, docs, community, and maintenance.
 
-Everywhere the real VERIFHE library would have RNS arithmetic, CKKS, PIOPs and a
-SNARK, `addlib` has `add_i64` and `add_f64`. The *shape* is faithful; the
-payload is trivial on purpose.
+The functionality is trivial on purpose. Replace `add_i64`/`add_f64` with your
+real performance-critical C and the surrounding structure carries over unchanged.
 
 ## 2. The C/Python boundary
 
-The split, per Phase 1.1:
-
-- **C** does the arithmetic (`c/src/add.c`). It is the performance core and the
+- **C** does the work (`c/src/add.c`). It is the performance core and the
   independently reusable artifact.
 - **Python** provides the ergonomic, misuse-resistant API
   (`python/src/addlib/core.py`).
 - They talk over a **CFFI** ABI (`python/src/addlib/_build_ffi.py`), chosen
-  because the core is pure C (no C++). This matches the roadmap's recommendation
-  ("clean C ABI exposed via CFFI ... best match for a pure-C core").
+  because the core is pure C (no C++).
 
 ```
             ┌─────────────────────────────┐
@@ -66,30 +62,31 @@ is a separate contract from the source API, versioned by `SOVERSION`
 
 ## 4. Module / artifact map
 
-Two artifacts from one monorepo (Phase 1.3, Option C):
+Two artifacts from one monorepo:
 
 | Artifact | What | Consumers | Build |
 | --- | --- | --- | --- |
 | `libadd` | C library + headers + CMake/pkg-config | C/C++ projects | CMake |
 | `addlib` | Python package bundling the C core | Python users (`pip install addlib`) | setuptools + CFFI → cibuildwheel |
 
-We **start by publishing the Python wheel** (which bundles the C core, so a user
-needs no toolchain) and ship the C library's CMake/pkg-config files for the
-minority who want to link `libadd` directly. This is the roadmap's recommended
-starting point: "a `libvfhe` C library plus a `verifhe` Python umbrella to begin
-with, with internal module boundaries clean enough to spin out ... later."
+We **publish the Python wheel** (which bundles the C core, so a user needs no
+toolchain) and ship the C library's CMake/pkg-config files for the minority who
+want to link `libadd` directly. The internal `c/` vs `python/` split is kept
+clean enough to spin the C library out to its own release later without moving
+code.
 
 ## 5. Stability tiering
 
-Mirrors Phase 1.2's primitives-vs-protocols gradient:
+Group the public surface by how fast it changes, so the architecture predicts
+where breaking changes originate:
 
 | Tier | Members | Stability promise |
 | --- | --- | --- |
 | **stable** | `add_i64`, `add_f64`, `add_version` and their Python wrappers | SemVer-guaranteed from 1.0; ABI guaranteed by `SOVERSION`. |
 | **experimental** | _(none yet)_ — e.g. a future `add_saturating`, vector add | May change in MINOR while pre-1.0; lives behind a clearly-marked import. |
 
-The tiering predicts where breaking changes originate and decides what earns a
-stability promise first.
+A stable core earns a stability promise first; fast-moving additions stay `0.x`
+longer without holding the core back.
 
 ## 6. Public API surface (v0)
 
@@ -104,9 +101,9 @@ Anything not listed is private and may change without notice (CFFI internals,
 
 ## 7. Build-backend decision (a deliberate deviation, documented)
 
-The roadmap recommends **scikit-build-core (CMake) + cibuildwheel**. We deviate
-for the Python wheel and use **setuptools + CFFI's own build integration**,
-because:
+A common recommendation is **scikit-build-core (CMake) + cibuildwheel**. We
+deviate for the Python wheel and use **setuptools + CFFI's own build
+integration**, because:
 
 1. The binding *is* CFFI, and CFFI generates and compiles its own extension
    module. Driving that through scikit-build-core/CMake adds a layer without
@@ -124,4 +121,4 @@ scikit-build-core.
 - A saturating or wrapping `add` variant (would seed the `experimental` tier).
 - Vectorized `add` over arrays (NumPy buffer protocol) — would change the
   binding ergonomics and might argue for a second published Python artifact.
-- Whether to expose `libadd` on conda-forge / vcpkg (demand-driven; Phase 5.6).
+- Whether to expose `libadd` on conda-forge / vcpkg (demand-driven).

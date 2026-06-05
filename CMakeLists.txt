@@ -3,9 +3,8 @@
 #
 # The Python package does NOT use this file — it compiles the C core via CFFI
 # (see python/src/addlib/_build_ffi.py). This CMake build exists so that C/C++
-# consumers can use libadd as a first-class, independently reusable artifact,
-# exactly as the roadmap's "separate the C ABI layer explicitly" refinement
-# recommends.
+# consumers can use libadd as a first-class, independently reusable artifact
+# with a cleanly separated C ABI layer.
 #
 #   cmake -S . -B build -DADDLIB_BUILD_TESTS=ON
 #   cmake --build build

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Block PRs that introduce vulnerable or license-incompatible dependencies
-# (Phase 0.1 dependency-license hygiene + Phase 4.2 dependency scanning).
+# Dependency-license hygiene + vulnerability scanning on PRs.
 name: Dependency Review
 
 on:

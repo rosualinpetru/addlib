@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 authors = [{ name = "Alin-Petru Roșu", email = "rosualinpetru@gmail.com" }]
-keywords = ["example", "cffi", "c-extension", "addition", "verifhe", "roadmap"]
+keywords = ["example", "cffi", "c-extension", "addition", "native-extension", "template"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
