@@ -26,9 +26,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install clang-format
-        run: sudo apt-get update && sudo apt-get install -y clang-format
-      - name: Install Python dev deps
+      - name: Install Python dev deps (incl. pinned clang-format)
         run: python -m pip install -e ".[dev]"
       - name: ruff (lint + format check)
         run: |
@@ -36,8 +34,8 @@ jobs:
           ruff format --check .
       - name: mypy
         run: mypy
-      - name: clang-format check
-        run: clang-format --dry-run --Werror c/src/*.c c/include/add/*.h c/tests/*.c c/fuzz/*.c
+      - name: clang-format check (pinned via dev deps)
+        run: clang-format --dry-run --Werror c/src/*.c c/include/add/*.h c/tests/*.c c/fuzz/*.c c/bench/*.c examples/*.c
 
   test:
     name: Test ${{ matrix.os }} / py${{ matrix.python }}

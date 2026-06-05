@@ -43,6 +43,7 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.10",
     "build>=1.2",
+    "clang-format==22.1.5",  # pinned so the C format gate is identical in CI and locally
 ]
 docs = [
     "mkdocs-material>=9.5",
