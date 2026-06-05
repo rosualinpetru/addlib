@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+# Fast PR pipeline: lint + unit tests across the matrix + sanitized C build +
+# packaging smoke test. Heavier work (fuzzing, valgrind, benchmarks) runs in
+# nightly.yml. Target: keep this under ~10 minutes.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint (C + Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install clang-format
+        run: sudo apt-get update && sudo apt-get install -y clang-format
+      - name: Install Python dev deps
+        run: python -m pip install -e ".[dev]"
+      - name: ruff (lint + format check)
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: mypy
+        run: mypy
+      - name: clang-format check
+        run: clang-format --dry-run --Werror c/src/*.c c/include/add/*.h c/tests/*.c c/fuzz/*.c
+
+  test:
+    name: Test ${{ matrix.os }} / py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install (builds the CFFI extension)
+        run: python -m pip install -e ".[dev]"
+      - name: Run tests
+        run: pytest -q
+
+  c-sanitizers:
+    name: C tests + ASan/UBSan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure (with sanitizers)
+        run: >
+          cmake -S . -B build -DADDLIB_BUILD_TESTS=ON
+          -DCMAKE_C_FLAGS="-fsanitize=address,undefined -fno-sanitize-recover=all -g"
+      - name: Build
+        run: cmake --build build
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  package-smoke:
+    name: Build sdist + wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build distributions
+        run: |
+          python -m pip install build twine
+          python -m build
+      - name: Check metadata
+        run: twine check dist/*
+      - name: Install the built wheel and smoke-test it
+        run: |
+          python -m pip install dist/*.whl
+          cd /tmp && python -c "import addlib; assert addlib.add(2, 3) == 5; print('wheel OK', addlib.__version__)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-smoke
+          path: dist/*
