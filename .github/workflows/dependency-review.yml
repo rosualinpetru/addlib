@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: Apache-2.0
+# Block PRs that introduce vulnerable or license-incompatible dependencies
+# (Phase 0.1 dependency-license hygiene + Phase 4.2 dependency scanning).
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          # Fail on a GPL dependency (incompatible with our Apache-2.0 posture)
+          # or any moderate+ vulnerability.
+          fail-on-severity: moderate
+          deny-licenses: GPL-2.0, GPL-3.0, AGPL-3.0
