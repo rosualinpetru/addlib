@@ -28,8 +28,8 @@ jobs:
           - language: c-cpp
             build-mode: manual
     steps:
-      - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+      - uses: actions/checkout@v6
+      - uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
@@ -38,6 +38,6 @@ jobs:
         run: |
           cmake -S . -B build -DADDLIB_BUILD_TESTS=ON
           cmake --build build
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@v4
         with:
           category: "/language:${{ matrix.language }}"

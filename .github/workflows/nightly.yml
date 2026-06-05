@@ -16,7 +16,7 @@ jobs:
     name: libFuzzer (deserialization-style target)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build fuzz target with clang
         run: |
           cmake -S . -B build -DADDLIB_BUILD_FUZZERS=ON -DCMAKE_C_COMPILER=clang
@@ -25,7 +25,7 @@ jobs:
         run: ./build/fuzz_add -max_total_time=120 -print_final_stats=1
       - name: Upload crashers (if any)
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: fuzz-crashers
           path: crash-*
@@ -34,7 +34,7 @@ jobs:
     name: Valgrind (memcheck) on C tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: sudo apt-get update && sudo apt-get install -y valgrind
       - run: cmake -S . -B build -DADDLIB_BUILD_TESTS=ON
       - run: cmake --build build
@@ -44,14 +44,14 @@ jobs:
     name: Benchmark trend
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: python -m pip install -e ".[dev]"
       - name: Run benchmarks
         run: pytest benchmarks --benchmark-only --benchmark-json=benchmark.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: benchmark-results
           path: benchmark.json
