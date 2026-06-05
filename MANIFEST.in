@@ -1,0 +1,19 @@
+# The sdist must carry the C sources so the wheel can compile the core from
+# source on the target machine (cibuildwheel does exactly this).
+graft c
+graft python/src
+
+include LICENSE NOTICE README.md CHANGELOG.md
+include pyproject.toml setup.py
+include CMakeLists.txt
+
+# Keep the sdist clean.
+global-exclude *.py[cod]
+global-exclude *.so *.o *.obj *.dylib *.dll
+global-exclude __pycache__
+prune build
+prune dist
+prune .venv
+prune **/.pytest_cache
+prune **/.mypy_cache
+prune **/.ruff_cache

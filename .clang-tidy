@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+# Static analysis for the C core. Security-relevant checks are weighted heavily
+# (bugprone, cert, clang-analyzer) since the C layer is where memory-safety and
+# integer bugs would live.
+Checks: >
+  clang-analyzer-*,
+  bugprone-*,
+  cert-*,
+  misc-*,
+  performance-*,
+  readability-*,
+  -readability-magic-numbers,
+  -misc-no-recursion
+WarningsAsErrors: 'clang-analyzer-*,bugprone-*,cert-*'
+HeaderFilterRegex: 'c/include/add/.*'
+FormatStyle: file

@@ -1,0 +1,109 @@
+# SPDX-License-Identifier: Apache-2.0
+[build-system]
+requires = ["setuptools>=77", "cffi>=1.17"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "addlib"
+version = "0.1.0"
+description = "Checked integer & float addition with a C core, exposed to Python via CFFI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Alin-Petru Roșu", email = "rosualinpetru@gmail.com" }]
+keywords = ["example", "cffi", "c-extension", "addition", "verifhe", "roadmap"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: C",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+dependencies = ["cffi>=1.17"]
+
+[project.urls]
+Homepage = "https://github.com/rosualinpetru/addlib"
+Documentation = "https://rosualinpetru.github.io/addlib"
+Repository = "https://github.com/rosualinpetru/addlib"
+Changelog = "https://github.com/rosualinpetru/addlib/blob/main/CHANGELOG.md"
+Issues = "https://github.com/rosualinpetru/addlib/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-benchmark>=4",
+    "hypothesis>=6",
+    "ruff>=0.6",
+    "mypy>=1.10",
+    "build>=1.2",
+]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.25",
+]
+
+# --- setuptools: where the package lives -------------------------------------
+[tool.setuptools]
+# The CFFI extension (addlib._add_cffi) is registered in setup.py via
+# `cffi_modules`; everything else (metadata, package discovery) is here.
+package-dir = { "" = "python/src" }
+
+[tool.setuptools.packages.find]
+where = ["python/src"]
+
+[tool.setuptools.package-data]
+addlib = ["py.typed"]
+
+# --- Tooling -----------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+src = ["python/src", "python/tests", "examples", "benchmarks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"python/tests/*" = ["B011"]  # asserts are fine in tests
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["python/src/addlib"]
+# The generated CFFI module and the cffi build API have no type stubs we depend
+# on; treat them as untyped.
+[[tool.mypy.overrides]]
+module = ["addlib._add_cffi", "_cffi_backend", "cffi"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["python/tests"]
+# Collect benchmark files (bench_*.py) too, so `pytest benchmarks` finds them;
+# the default `pytest` run only scans testpaths, so they are not collected then.
+python_files = ["test_*.py", "bench_*.py"]
+addopts = "-ra --strict-markers --strict-config"
+markers = [
+    "kat: known-answer (fixed-vector) tests",
+    "negative: adversarial / must-reject tests (release-blocking)",
+]
+
+[tool.cibuildwheel]
+# Build for CPython only; skip 32-bit and musllinux to keep the example lean.
+build = "cp310-* cp311-* cp312-* cp313-* cp314-*"
+skip = ["*-win32", "*_i686", "*-musllinux*"]
+# Smoke-test every built wheel by importing and adding in a fresh environment.
+test-requires = ["pytest", "hypothesis"]
+test-command = "pytest {project}/python/tests -q"
+build-frontend = "build"
+
+[tool.cibuildwheel.linux]
+# Use manylinux so wheels run on most distros without recompilation.
+manylinux-x86_64-image = "manylinux2014"
