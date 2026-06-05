@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "addlib"
-version = "0.1.0"
+version = "0.1.1"
 description = "Checked integer & float addition with a C core, exposed to Python via CFFI."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -105,6 +105,4 @@ test-requires = ["pytest", "hypothesis"]
 test-command = "pytest {project}/python/tests -q"
 build-frontend = "build"
 
-[tool.cibuildwheel.linux]
-# Use manylinux so wheels run on most distros without recompilation.
-manylinux-x86_64-image = "manylinux2014"
+# Linux: cibuildwheel's default manylinux image is used (it includes cp314).
