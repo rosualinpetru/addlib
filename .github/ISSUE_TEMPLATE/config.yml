@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/rosualinpetru/addlib/security/advisories/new
+    about: >-
+      Report vulnerabilities privately — NEVER as a public issue. See SECURITY.md.
+  - name: 💬 Questions & ideas
+    url: https://github.com/rosualinpetru/addlib/discussions
+    about: Ask questions or float ideas in GitHub Discussions.
