@@ -1356,15 +1356,18 @@ changelog).</p>
 </ul>
 <h2 id="release-checklist">Release checklist<a class="headerlink" href="#release-checklist" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Ensure <code>main</code> is green and the <a href="https://github.com/rosualinpetru/addlib/blob/main/CHANGELOG.md">changelog</a> <code>Unreleased</code>
-   section reflects what is shipping.</li>
-<li>Bump the version in <strong>both</strong> places that must agree:</li>
-<li><code>pyproject.toml</code> → <code>version</code></li>
-<li><code>c/include/add/add.h</code> → <code>ADDLIB_VERSION_*</code> / <code>ADDLIB_VERSION_STRING</code>
-   (<code>test_version_consistency</code> and <code>test_version_symbol</code> fail if they drift.)</li>
-<li>Move <code>Unreleased</code> → <code>[X.Y.Z] — DATE</code> in the changelog; add the compare link.</li>
-<li>Commit (<code>-s</code>, signed): <code>git commit -S -s -m "chore(release): vX.Y.Z"</code>.</li>
-<li>Tag and push: <code>git tag -s vX.Y.Z -m "vX.Y.Z" &amp;&amp; git push --tags</code>.</li>
+<li>Ensure <code>main</code> is green.</li>
+<li>Bump the version with one command:
+   <div class="highlight"><pre><span></span><code>make<span class="w"> </span>bump<span class="w"> </span><span class="nv">V</span><span class="o">=</span>X.Y.Z
+</code></pre></div>
+   This writes the single source of truth — the top-level <code>VERSION</code> file (the
+   Python distribution version) — and the C library version in
+   <code>c/include/add/add.h</code>. A test (<code>test_version_consistency</code>) fails if the two
+   ever drift.</li>
+<li>Update the changelog (<code>make changelog</code> regenerates it from Conventional
+   Commits via git-cliff; or hand-edit <code>CHANGELOG.md</code>).</li>
+<li>Commit (<code>-s</code> for DCO): <code>git commit -s -m "chore(release): vX.Y.Z"</code>.</li>
+<li>Tag and push: <code>git tag -a vX.Y.Z -m "vX.Y.Z" &amp;&amp; git push origin vX.Y.Z</code>.</li>
 </ol>
 <h2 id="what-the-tag-triggers-releaseyaml">What the tag triggers (<code>release.yaml</code>)<a class="headerlink" href="#what-the-tag-triggers-releaseyaml" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1385,9 +1388,10 @@ those out-of-band).</p>
 <ul>
 <li><strong>PyPI</strong> — wheels + sdist, from day one.</li>
 <li><strong>GitHub Releases</strong> — canonical home for signed artifacts, SBOM, checksums.</li>
-<li><strong>conda-forge</strong> — add a feedstock around the first stable release; much of the
-  scientific-Python audience lives in conda and won't build native extensions by
-  hand. (Demand-driven; not set up yet.)</li>
+<li><strong>conda-forge</strong> — much of the scientific-Python audience lives in conda and
+  won't build native extensions by hand. A ready-to-adapt recipe is in
+  <a href="https://github.com/rosualinpetru/addlib/blob/main/recipe/meta.yaml"><code>recipe/meta.yaml</code></a>;
+  submission steps are in <a href="https://github.com/rosualinpetru/addlib/blob/main/recipe/README.md"><code>recipe/README.md</code></a>. (Demand-driven; not yet submitted.)</li>
 <li><strong>vcpkg / Conan</strong> for <code>libadd</code> — only if/when C consumers ask. Don't pre-build.</li>
 </ul>
 
