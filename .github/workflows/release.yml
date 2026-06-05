@@ -60,12 +60,15 @@ jobs:
           path: addlib-sbom.json
 
   publish:
-    name: Publish to PyPI + signed GitHub Release
+    # NOTE: targets TestPyPI (experimental). For a production PyPI release,
+    # change the environment URL to https://pypi.org/p/addlib and remove the
+    # `repository-url` from the publish step below (it then defaults to PyPI).
+    name: Publish to TestPyPI + signed GitHub Release
     needs: [wheels, sdist, sbom]
     runs-on: ubuntu-latest
     environment:
-      name: pypi
-      url: https://pypi.org/p/addlib
+      name: testpypi
+      url: https://test.pypi.org/p/addlib
     permissions:
       contents: write # create the GitHub Release
       id-token: write # PyPI Trusted Publishing + provenance attestation
@@ -86,8 +89,10 @@ jobs:
         uses: actions/attest-build-provenance@v1
         with:
           subject-path: "dist/*"
-      - name: Publish to PyPI (Trusted Publishing — no token)
+      - name: Publish to TestPyPI (Trusted Publishing — no token)
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
       - name: Sign artifacts with Sigstore
         uses: sigstore/gh-action-sigstore-python@v3.0.0
         with:
