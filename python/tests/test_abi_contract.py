@@ -37,4 +37,4 @@ def test_direct_abi_overflow_leaves_out_untouched() -> None:
 
 
 def test_version_symbol() -> None:
-    assert ffi.string(lib.add_version()) == b"0.1.0"
+    assert ffi.string(lib.add_version()) == b"0.1.1"

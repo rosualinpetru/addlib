@@ -10,6 +10,13 @@ hand-curated — auto-generated lists alone make poor release notes.
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-06-05
+
+### Changed
+- Publish **cp314 (Python 3.14) wheels**: upgrade cibuildwheel to v3.4.1 and drop
+  the `manylinux2014` image pin so the current default (3.14-capable) image is
+  used. `pip install` now needs no compiler on Python 3.14.
+
 ## [0.1.0] — 2026-06-04
 
 ### Added
@@ -34,5 +41,6 @@ hand-curated — auto-generated lists alone make poor release notes.
   ([security policy](https://github.com/rosualinpetru/addlib/blob/main/SECURITY.md));
   disclosure runbook documented.
 
-[Unreleased]: https://github.com/rosualinpetru/addlib/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/rosualinpetru/addlib/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/rosualinpetru/addlib/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/rosualinpetru/addlib/releases/tag/v0.1.0
