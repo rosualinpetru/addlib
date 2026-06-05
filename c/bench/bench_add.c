@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-/* Copyright 2026 Alin-Petru Roșu */
+/* Copyright 2026 Alin-Petru Rosu */
 /* A tiny wall-clock microbenchmark for the C core. CI tracks trends from the
  * Python benchmarks (pytest-benchmark); this one is for local C-level profiling. */
 

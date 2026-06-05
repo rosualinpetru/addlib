@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-/* Copyright 2026 Alin-Petru Roșu */
+/* Copyright 2026 Alin-Petru Rosu */
 
 #include "add/add.h"
 
