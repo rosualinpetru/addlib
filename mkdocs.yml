@@ -53,6 +53,7 @@ nav:
   - How-to guides:
       - Handle overflow safely: how-to/handling-overflow.md
       - Use libadd from C/C++: how-to/use-libadd-from-c.md
+      - Enable Codecov: how-to/codecov.md
   - Reference:
       - Python API: reference/python-api.md
       - C API: reference/c-api.md

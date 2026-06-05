@@ -1,0 +1,18 @@
+# Codecov configuration — https://docs.codecov.com/docs/codecov-yaml
+coverage:
+  status:
+    project:
+      default:
+        target: auto # don't regress below current coverage
+        threshold: 1%
+    patch:
+      default:
+        target: 80% # new/changed lines should be ~80% covered
+
+comment:
+  layout: "reach, diff, files"
+  require_changes: true
+
+# The build-time CFFI script isn't exercised by the test suite.
+ignore:
+  - "python/src/addlib/_build_ffi.py"
