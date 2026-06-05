@@ -8,7 +8,7 @@ changelog).
 
 ## One-time setup
 
-- **PyPI Trusted Publishing**: register the repo + `release.yml` workflow as a
+- **PyPI Trusted Publishing**: register the repo + `release.yaml` workflow as a
   trusted publisher on PyPI (OIDC). No long-lived API token lives in the repo.
 - **Branch protection** on `main`: required review, green CI, signed commits.
 
@@ -24,7 +24,7 @@ changelog).
 4. Commit (`-s`, signed): `git commit -S -s -m "chore(release): vX.Y.Z"`.
 5. Tag and push: `git tag -s vX.Y.Z -m "vX.Y.Z" && git push --tags`.
 
-## What the tag triggers (`release.yml`)
+## What the tag triggers (`release.yaml`)
 
 1. **Build** wheels (cibuildwheel: manylinux, macOS incl. Apple Silicon,
    Windows) and an sdist; each wheel is import-smoke-tested.
