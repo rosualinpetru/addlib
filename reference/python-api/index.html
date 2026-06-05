@@ -1234,7 +1234,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1550,7 +1550,8 @@ add(-1, 1)
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>python/src/addlib/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+<span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
@@ -1588,8 +1589,7 @@ add(-1, 1)
 <span class="normal">95</span>
 <span class="normal">96</span>
 <span class="normal">97</span>
-<span class="normal">98</span>
-<span class="normal">99</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``a + b`` for two signed 64-bit integers, computed in C.</span>
 
 <span class="sd">    Args:</span>
@@ -1652,8 +1652,7 @@ add(-1, 1)
 <p>Follows IEEE-754 semantics: <code>add_floats(float("inf"), 1.0)</code> is <code>inf</code> and
 NaN propagates; no exception is raised for those. Because the result is
 approximate, callers should compare with a tolerance, not for exact
-equality — the floating-point analogue of CKKS's approximate arithmetic
-(see :func:<code>addlib.testing.approx_equal</code>).</p>
+equality (see :func:<code>addlib.testing.approx_equal</code>).</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1764,7 +1763,8 @@ add_floats(0.1, 0.2)
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>python/src/addlib/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
+<span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
 <span class="normal">105</span>
@@ -1788,16 +1788,13 @@ add_floats(0.1, 0.2)
 <span class="normal">123</span>
 <span class="normal">124</span>
 <span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_floats</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_floats</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``a + b`` for two real numbers, computed in C as IEEE-754 doubles.</span>
 
 <span class="sd">    Follows IEEE-754 semantics: ``add_floats(float(&quot;inf&quot;), 1.0)`` is ``inf`` and</span>
 <span class="sd">    NaN propagates; no exception is raised for those. Because the result is</span>
 <span class="sd">    approximate, callers should compare with a tolerance, not for exact</span>
-<span class="sd">    equality — the floating-point analogue of CKKS&#39;s approximate arithmetic</span>
-<span class="sd">    (see :func:`addlib.testing.approx_equal`).</span>
+<span class="sd">    equality (see :func:`addlib.testing.approx_equal`).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        a: First addend (int or float).</span>
@@ -1843,14 +1840,14 @@ package version.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>python/src/addlib/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">131</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
 <span class="normal">134</span>
 <span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">c_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">c_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the version string reported by the underlying C core.</span>
 
 <span class="sd">    Useful for asserting that the loaded native extension matches the Python</span>
@@ -1895,12 +1892,12 @@ package version.</p>
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>python/src/addlib/core.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AdditionOverflowError</span><span class="p">(</span><span class="ne">OverflowError</span><span class="p">):</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AdditionOverflowError</span><span class="p">(</span><span class="ne">OverflowError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when an integer addition cannot be represented in signed 64 bits.</span>
 
 <span class="sd">    Subclasses the built-in :class:`OverflowError`, so existing</span>
@@ -1935,7 +1932,9 @@ project's default tolerances.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>python/src/addlib/testing.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
@@ -1950,9 +1949,7 @@ project's default tolerances.</p>
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">approx_equal</span><span class="p">(</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">approx_equal</span><span class="p">(</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>

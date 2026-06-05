@@ -1175,7 +1175,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1295,13 +1295,13 @@
 
 
 <h1 id="addlib">addlib<a class="headerlink" href="#addlib" title="Permanent link">&para;</a></h1>
-<p><strong>Checked integer &amp; float addition with a C core, exposed to Python via a CFFI ABI.</strong></p>
-<p><code>addlib</code> adds two numbers — on purpose. It is a worked, end-to-end example of the
-VERIFHE open-source library roadmap: a C performance core (<code>libadd</code>) bound to a
-Python API (<code>addlib</code>) through a CFFI ABI, taken through every phase of building a
-real, security-critical open-source library.</p>
-<p>The shape is faithful; the payload is trivial. Read it in an afternoon, lift the
-scaffolding.</p>
+<p><strong>A Python library backed by a C core through a CFFI ABI — and a template for
+building, testing, securing, packaging, and releasing a native (C + Python)
+open-source library.</strong></p>
+<p><code>addlib</code> adds two numbers. The functionality is trivial on purpose; the
+scaffolding around it is what's worth copying: a clean C/Python boundary, a real
+test strategy, cross-platform wheels, supply-chain security, and an automated
+signed release.</p>
 <h2 id="30-seconds">30 seconds<a class="headerlink" href="#30-seconds" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">addlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">add_floats</span>
 

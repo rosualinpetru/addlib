@@ -1201,7 +1201,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1344,9 +1344,9 @@
 
 <h1 id="anti-patterns-what-not-to-do">Anti-patterns (what <em>not</em> to do)<a class="headerlink" href="#anti-patterns-what-not-to-do" title="Permanent link">&para;</a></h1>
 <p>For an audience with limited domain expertise, "here is the wrong way" is as
-valuable as the how-to (roadmap Phase 6.2). For a real crypto library this page
-would list parameter choices that silently destroy security. For <code>addlib</code> the
-stakes are small, but the habit is the point.</p>
+valuable as the how-to. For a larger library this page would list the sharp
+edges that cause silent wrong results or misuse. For <code>addlib</code> the stakes are
+small, but the habit is the point.</p>
 <h2 id="assuming-integer-addition-wraps">❌ Assuming integer addition wraps<a class="headerlink" href="#assuming-integer-addition-wraps" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">63</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># does NOT return -2**63; raises AdditionOverflowError</span>
 </code></pre></div>

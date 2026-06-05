@@ -1234,7 +1234,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1410,28 +1410,25 @@
 
 <h1 id="technical-design-document">Technical Design Document<a class="headerlink" href="#technical-design-document" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>This is the Task 1.1 deliverable analogue: a living design document, reviewed
-like code. It is the home for the C-ABI contract, the module dependency graph,
-the artifact decision, the stability tiering, and the public-API surface.</p>
+<p>A living design document, reviewed like code. It is the home for the C-ABI
+contract, the module dependency graph, the artifact decision, the stability
+tiering, and the public-API surface.</p>
 </blockquote>
 <h2 id="1-scope">1. Scope<a class="headerlink" href="#1-scope" title="Permanent link">&para;</a></h2>
-<p><code>addlib</code> adds two numbers. It exists as a <em>worked example</em> of the VERIFHE
-open-source library roadmap: a C performance core exposed to Python through a
-CFFI ABI, carried through every phase (licensing, CI, testing, security,
-release, docs, community, maintenance).</p>
-<p>Everywhere the real VERIFHE library would have RNS arithmetic, CKKS, PIOPs and a
-SNARK, <code>addlib</code> has <code>add_i64</code> and <code>add_f64</code>. The <em>shape</em> is faithful; the
-payload is trivial on purpose.</p>
+<p><code>addlib</code> adds two numbers. It exists as a <strong>template and worked example</strong> of a
+Python library with a C performance core exposed through a CFFI ABI, carried
+through the full lifecycle of an open-source native library: licensing, CI,
+testing, security, releasing, docs, community, and maintenance.</p>
+<p>The functionality is trivial on purpose. Replace <code>add_i64</code>/<code>add_f64</code> with your
+real performance-critical C and the surrounding structure carries over unchanged.</p>
 <h2 id="2-the-cpython-boundary">2. The C/Python boundary<a class="headerlink" href="#2-the-cpython-boundary" title="Permanent link">&para;</a></h2>
-<p>The split, per Phase 1.1:</p>
 <ul>
-<li><strong>C</strong> does the arithmetic (<code>c/src/add.c</code>). It is the performance core and the
+<li><strong>C</strong> does the work (<code>c/src/add.c</code>). It is the performance core and the
   independently reusable artifact.</li>
 <li><strong>Python</strong> provides the ergonomic, misuse-resistant API
   (<code>python/src/addlib/core.py</code>).</li>
 <li>They talk over a <strong>CFFI</strong> ABI (<code>python/src/addlib/_build_ffi.py</code>), chosen
-  because the core is pure C (no C++). This matches the roadmap's recommendation
-  ("clean C ABI exposed via CFFI ... best match for a pure-C core").</li>
+  because the core is pure C (no C++).</li>
 </ul>
 <div class="highlight"><pre><span></span><code>            ┌─────────────────────────────┐
  users  ──▶ │ addlib (Python)             │   high-level, validated, typed
@@ -1489,7 +1486,7 @@ is a separate contract from the source API, versioned by <code>SOVERSION</code>
 (= MAJOR). Breaking it is a MAJOR event even if Python is unaffected. See
 <a href="../versioning/">versioning.md</a>.</p>
 <h2 id="4-module-artifact-map">4. Module / artifact map<a class="headerlink" href="#4-module-artifact-map" title="Permanent link">&para;</a></h2>
-<p>Two artifacts from one monorepo (Phase 1.3, Option C):</p>
+<p>Two artifacts from one monorepo:</p>
 <table>
 <thead>
 <tr>
@@ -1514,13 +1511,14 @@ is a separate contract from the source API, versioned by <code>SOVERSION</code>
 </tr>
 </tbody>
 </table>
-<p>We <strong>start by publishing the Python wheel</strong> (which bundles the C core, so a user
-needs no toolchain) and ship the C library's CMake/pkg-config files for the
-minority who want to link <code>libadd</code> directly. This is the roadmap's recommended
-starting point: "a <code>libvfhe</code> C library plus a <code>verifhe</code> Python umbrella to begin
-with, with internal module boundaries clean enough to spin out ... later."</p>
+<p>We <strong>publish the Python wheel</strong> (which bundles the C core, so a user needs no
+toolchain) and ship the C library's CMake/pkg-config files for the minority who
+want to link <code>libadd</code> directly. The internal <code>c/</code> vs <code>python/</code> split is kept
+clean enough to spin the C library out to its own release later without moving
+code.</p>
 <h2 id="5-stability-tiering">5. Stability tiering<a class="headerlink" href="#5-stability-tiering" title="Permanent link">&para;</a></h2>
-<p>Mirrors Phase 1.2's primitives-vs-protocols gradient:</p>
+<p>Group the public surface by how fast it changes, so the architecture predicts
+where breaking changes originate:</p>
 <table>
 <thead>
 <tr>
@@ -1542,8 +1540,8 @@ with, with internal module boundaries clean enough to spin out ... later."</p>
 </tr>
 </tbody>
 </table>
-<p>The tiering predicts where breaking changes originate and decides what earns a
-stability promise first.</p>
+<p>A stable core earns a stability promise first; fast-moving additions stay <code>0.x</code>
+longer without holding the core back.</p>
 <h2 id="6-public-api-surface-v0">6. Public API surface (v0)<a class="headerlink" href="#6-public-api-surface-v0" title="Permanent link">&para;</a></h2>
 <p>Python (<code>addlib</code>): <code>add</code>, <code>add_floats</code>, <code>c_version</code>, <code>AdditionOverflowError</code>,
 <code>__version__</code>. Plus <code>addlib.testing.approx_equal</code> for tolerance-based float
@@ -1552,9 +1550,9 @@ comparison.</p>
 <p>Anything not listed is private and may change without notice (CFFI internals,
 <code>_build_ffi</code>, <code>_add_cffi</code>).</p>
 <h2 id="7-build-backend-decision-a-deliberate-deviation-documented">7. Build-backend decision (a deliberate deviation, documented)<a class="headerlink" href="#7-build-backend-decision-a-deliberate-deviation-documented" title="Permanent link">&para;</a></h2>
-<p>The roadmap recommends <strong>scikit-build-core (CMake) + cibuildwheel</strong>. We deviate
-for the Python wheel and use <strong>setuptools + CFFI's own build integration</strong>,
-because:</p>
+<p>A common recommendation is <strong>scikit-build-core (CMake) + cibuildwheel</strong>. We
+deviate for the Python wheel and use <strong>setuptools + CFFI's own build
+integration</strong>, because:</p>
 <ol>
 <li>The binding <em>is</em> CFFI, and CFFI generates and compiles its own extension
    module. Driving that through scikit-build-core/CMake adds a layer without
@@ -1571,7 +1569,7 @@ scikit-build-core.</p>
 <li>A saturating or wrapping <code>add</code> variant (would seed the <code>experimental</code> tier).</li>
 <li>Vectorized <code>add</code> over arrays (NumPy buffer protocol) — would change the
   binding ergonomics and might argue for a second published Python artifact.</li>
-<li>Whether to expose <code>libadd</code> on conda-forge / vcpkg (demand-driven; Phase 5.6).</li>
+<li>Whether to expose <code>libadd</code> on conda-forge / vcpkg (demand-driven).</li>
 </ul>
 
 

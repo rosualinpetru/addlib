@@ -772,10 +772,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-in-scope" class="md-nav__link">
+  <a href="#in-scope" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is in scope
+        In scope
       
     </span>
   </a>
@@ -783,21 +783,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-out-of-scope" class="md-nav__link">
+  <a href="#out-of-scope" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is out of scope
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#constant-time-note" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constant-time note
+        Out of scope
       
     </span>
   </a>
@@ -1223,7 +1212,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1312,10 +1301,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-in-scope" class="md-nav__link">
+  <a href="#in-scope" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is in scope
+        In scope
       
     </span>
   </a>
@@ -1323,21 +1312,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-out-of-scope" class="md-nav__link">
+  <a href="#out-of-scope" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is out of scope
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#constant-time-note" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constant-time note
+        Out of scope
       
     </span>
   </a>
@@ -1387,10 +1365,9 @@
 
 
 <h1 id="security-model">Security model<a class="headerlink" href="#security-model" title="Permanent link">&para;</a></h1>
-<p>A short, honest statement of what <code>addlib</code> does and does not protect — the
-Phase 4.1 discipline. For a cryptographic library this section pre-answers the
-questions every auditor asks; for an addition library it is deliberately small,
-but the <em>structure</em> is the point.</p>
+<p>A short, honest statement of what <code>addlib</code> does and does not protect. For an
+addition library it is deliberately small, but writing it down is the discipline
+worth copying into a real project.</p>
 <h2 id="what-the-library-does">What the library does<a class="headerlink" href="#what-the-library-does" title="Permanent link">&para;</a></h2>
 <p><code>addlib</code> computes <code>a + b</code> for signed 64-bit integers (checked) and IEEE-754
 doubles (approximate). That is the entire functional surface.</p>
@@ -1404,50 +1381,41 @@ doubles (approximate). That is the entire functional surface.</p>
 </thead>
 <tbody>
 <tr>
-<td>Does it process secrets?</td>
-<td><strong>No.</strong> Inputs are ordinary numbers, not keys or plaintexts.</td>
-</tr>
-<tr>
-<td>Is timing/side-channel resistance required?</td>
-<td><strong>No</strong> — there are no secrets, so there is nothing to leak through timing. <code>add_i64</code> does branch on values (overflow check); this is fine <em>here</em> and would <strong>not</strong> be acceptable for a secret-dependent operation. The point is documented so the assumption is explicit.</td>
+<td>Does it process secret/sensitive data?</td>
+<td><strong>No.</strong> Inputs are ordinary numbers. There is nothing to keep confidential, so side-channel/timing concerns do not apply here.</td>
 </tr>
 <tr>
 <td>What can untrusted input do?</td>
-<td>The only untrusted-input path is the C function turning bytes/arguments into a result. The risk class is <strong>memory safety / undefined behavior</strong>, not confidentiality.</td>
+<td>The only untrusted-input path is the C code turning bytes/arguments into a result. The risk class is <strong>memory safety / undefined behavior</strong>.</td>
 </tr>
 <tr>
-<td>What is the integrity guarantee?</td>
-<td><code>add_i64</code> either returns the mathematically exact sum or signals <code>ADD_ERR_OVERFLOW</code>; it never returns a wrong or silently-wrapped value. <code>add_floats</code> returns the correctly-rounded IEEE-754 sum.</td>
+<td>What is the correctness guarantee?</td>
+<td><code>add_i64</code> either returns the mathematically exact sum or signals <code>ADD_ERR_OVERFLOW</code>; it never returns a wrong or silently-wrapped value. <code>add_f64</code> returns the correctly-rounded IEEE-754 sum.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="what-is-in-scope">What is in scope<a class="headerlink" href="#what-is-in-scope" title="Permanent link">&para;</a></h2>
+<h2 id="in-scope">In scope<a class="headerlink" href="#in-scope" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Memory safety of the C core.</strong> Mitigated by: a total implementation (no
   input triggers UB), ASan/UBSan in CI, Valgrind nightly, and a libFuzzer target
   with a 128-bit oracle.</li>
-<li><strong>Correctness / "soundness".</strong> Mitigated by KATs, property-based tests, and
+<li><strong>Correctness.</strong> Mitigated by known-answer tests, property-based tests, and
   release-blocking negative tests (overflow and bad input must be rejected).</li>
-<li><strong>Supply-chain integrity.</strong> This is the part that genuinely matters even for a
-  trivial library — see <a href="#supply-chain">supply chain</a>, below.</li>
+<li><strong>Supply-chain integrity.</strong> The part that matters even for a trivial
+  dependency — see below.</li>
 </ul>
-<h2 id="what-is-out-of-scope">What is out of scope<a class="headerlink" href="#what-is-out-of-scope" title="Permanent link">&para;</a></h2>
+<h2 id="out-of-scope">Out of scope<a class="headerlink" href="#out-of-scope" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Confidentiality / side-channel resistance (no secrets).</li>
-<li>Arbitrary-precision arithmetic (use Python <code>int</code> for that; we bound to int64
-  on purpose and reject out-of-range inputs loudly).</li>
-<li>Concurrency hazards: the functions are pure and reentrant; there is no shared
-  state.</li>
+<li>Confidentiality / data protection (no secrets are handled).</li>
+<li>Arbitrary-precision arithmetic (use Python <code>int</code>; we bound to int64 on purpose
+  and reject out-of-range inputs loudly).</li>
+<li>Concurrency hazards: the functions are pure and reentrant; no shared state.</li>
 </ul>
-<h2 id="constant-time-note">Constant-time note<a class="headerlink" href="#constant-time-note" title="Permanent link">&para;</a></h2>
-<p>No operation in <code>addlib</code> is constant-time, and none needs to be, because none
-touches a secret. If a future variant ever operates on secret data, it must be
-re-evaluated against a constant-time requirement and this document updated.</p>
 <h2 id="supply-chain">Supply chain<a class="headerlink" href="#supply-chain" title="Permanent link">&para;</a></h2>
-<p>The realistic attack surface for a tiny dependency is the <em>build and
-distribution path</em>, not the code. Controls (Phase 4.2):</p>
+<p>The realistic attack surface for a small dependency is the <em>build and
+distribution path</em>, not the code. Controls:</p>
 <ul>
-<li><strong>Signed releases</strong> via Sigstore/cosign + published checksums.</li>
+<li><strong>Signed releases</strong> via Sigstore + published checksums.</li>
 <li><strong>PyPI Trusted Publishing</strong> (OIDC) — no long-lived token.</li>
 <li><strong>SBOM</strong> (CycloneDX) attached to every release.</li>
 <li><strong>Provenance attestations</strong> (SLSA / GitHub artifact attestations).</li>
@@ -1458,10 +1426,9 @@ distribution path</em>, not the code. Controls (Phase 4.2):</p>
 </ul>
 <p>See <a href="../releasing/">releasing.md</a> and the workflows in <code>.github/workflows/</code>.</p>
 <h2 id="audit-status">Audit status<a class="headerlink" href="#audit-status" title="Permanent link">&para;</a></h2>
-<p><strong>Unaudited.</strong> This is an example project. A real library would state here what
-has and has not been independently reviewed, and would not claim
-production-readiness before a focused external review of the soundness-critical
-code. Overclaiming is worse than disclosing the gap.</p>
+<p><strong>Unaudited.</strong> This is an example/template project and makes no
+production-readiness claim. A real project would state here what has and has not
+been independently reviewed — overclaiming is worse than disclosing the gap.</p>
 
 
 

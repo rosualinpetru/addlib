@@ -1190,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1326,7 +1326,7 @@
 <li>Date: 2026-06-04</li>
 </ul>
 <h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
-<p>Phase 2.2 recommends <strong>scikit-build-core (CMake) + cibuildwheel</strong> as the build
+<p>A common recommendation is <strong>scikit-build-core (CMake) + cibuildwheel</strong> as the build
 backend. Our binding is CFFI (ADR-0002), which generates and compiles its own
 extension module. We need a backend that drives CFFI cleanly and still serves
 C consumers.</p>
@@ -1336,7 +1336,7 @@ C consumers.</p>
   <code>cffi_modules</code> integration (a one-line <code>setup.py</code> plus metadata in
   <code>pyproject.toml</code>). Wheels are built across platforms with <strong>cibuildwheel</strong>.</li>
 <li><strong>Standalone C library</strong>: a full <strong>CMake</strong> build (<code>CMakeLists.txt</code>, install,
-  export, pkg-config) — unchanged from the roadmap's intent.</li>
+  export, pkg-config) — unchanged from the usual intent.</li>
 </ul>
 <h2 id="rationale">Rationale<a class="headerlink" href="#rationale" title="Permanent link">&para;</a></h2>
 <ul>

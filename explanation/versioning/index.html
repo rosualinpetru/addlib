@@ -1240,7 +1240,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1446,21 +1446,21 @@ where breaking changes originate.</p>
    signature) is a MAJOR event for C consumers even if the Python API is
    untouched. This is a dimension Python-only projects never face.</li>
 <li><strong>Wire / serialization format</strong> — <em>not applicable</em> to <code>addlib</code> (it serializes
-   nothing). Recorded here because the principle matters for the real library: a
-   proof/ciphertext serialized by one version must be verifiable by a compatible
-   one, or the incompatibility must be loud. Version such a format with its own
+   nothing). Recorded here because the principle matters once a library serializes data:
+   anything written by one version must be readable by a compatible one, or the
+   incompatibility must be loud. Version such a format with its own
    explicit number, independent of the code API.</li>
 </ol>
 <h2 id="security-patches">Security patches<a class="headerlink" href="#security-patches" title="Permanent link">&para;</a></h2>
-<p>A fix for a memory-safety or correctness ("soundness") bug ships as a <strong>PATCH</strong>,
+<p>A fix for a memory-safety or correctness bug ships as a <strong>PATCH</strong>,
 is announced via a security advisory, and — once we support older lines — may be
 backported. See the <a href="../disclosure-runbook/">disclosure runbook</a>.</p>
 <h2 id="single-vs-multi-artifact-versioning">Single- vs multi-artifact versioning<a class="headerlink" href="#single-vs-multi-artifact-versioning" title="Permanent link">&para;</a></h2>
 <p>Today we ship effectively one product (the <code>addlib</code> wheel bundles the C core),
 so we version <strong>lockstep</strong>: one number, one tag, one changelog. Simple to reason
 about.</p>
-<p>If/when <code>libadd</code> gains an independent release cadence (ADR-0003), we move to the
-<strong>hybrid</strong> scheme the roadmap recommends:</p>
+<p>If/when <code>libadd</code> gains an independent release cadence (ADR-0003), we move to a
+<strong>hybrid</strong> scheme:</p>
 <ul>
 <li>version the stable C library independently (it changes slowly, earns long-lived
   guarantees);</li>

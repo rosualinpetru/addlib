@@ -1212,7 +1212,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1365,8 +1365,8 @@
 
 
 <h1 id="testing-strategy">Testing strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h1>
-<p>For a security-critical library, testing is part of the <em>security argument</em>, not
-just QA. <code>addlib</code> models that discipline at small scale.</p>
+<p>For a library that ships a compiled extension, tests are part of the <em>correctness
+and safety argument</em>, not just QA. <code>addlib</code> models that discipline at small scale.</p>
 <h2 id="the-pyramid">The pyramid<a class="headerlink" href="#the-pyramid" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1383,9 +1383,9 @@ just QA. <code>addlib</code> models that discipline at small scale.</p>
 <td>Every function, happy path + edges.</td>
 </tr>
 <tr>
-<td><strong>Known-Answer Tests</strong></td>
+<td><strong>Known-answer</strong></td>
 <td><code>python/tests/test_kat.py</code></td>
-<td>Fixed input→output vectors; the crypto layer ordinary software skips.</td>
+<td>Fixed input→output vectors — an exact-value regression guard.</td>
 </tr>
 <tr>
 <td><strong>Property-based</strong></td>
@@ -1406,8 +1406,7 @@ just QA. <code>addlib</code> models that discipline at small scale.</p>
 </table>
 <h2 id="release-blocking-gates">Release-blocking gates<a class="headerlink" href="#release-blocking-gates" title="Permanent link">&para;</a></h2>
 <p>The <code>negative</code> and <code>kat</code> markers flag tests that must never be weakened to make
-a change pass — the analogue of the roadmap's "treat a soundness regression like
-a crash." Run just those:</p>
+a change pass — treat a regression there like a crash. Run just those:</p>
 <div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>-m<span class="w"> </span>negative
 pytest<span class="w"> </span>-m<span class="w"> </span>kat
 </code></pre></div>
@@ -1416,11 +1415,11 @@ pytest<span class="w"> </span>-m<span class="w"> </span>kat
 under Valgrind nightly. The implementation is written to be <em>total</em> — no input
 triggers undefined behavior — which is the property the fuzzer verifies.</p>
 <h2 id="fuzzing">Fuzzing<a class="headerlink" href="#fuzzing" title="Permanent link">&para;</a></h2>
-<p><code>c/fuzz/fuzz_add.c</code> is a libFuzzer target over the "bytes → result" path (the
-deserialization analogue, where memory-safety CVEs live). It uses a <strong>128-bit
-differential oracle</strong>: <code>__int128</code> addition can't overflow two <code>int64</code> values, so
-it pins the exact expected status and result for every input. Runs nightly; a
-real project would also apply to OSS-Fuzz.</p>
+<p><code>c/fuzz/fuzz_add.c</code> is a libFuzzer target over the "bytes → result" path
+(attacker-controlled input is where memory-safety bugs surface). It uses a
+<strong>128-bit differential oracle</strong>: <code>__int128</code> addition can't overflow two <code>int64</code>
+values, so it pins the exact expected status and result for every input. Runs
+nightly.</p>
 <p>Run it locally with <code>make fuzz</code>. On <strong>macOS</strong>, Apple's bundled clang does not
 ship the libFuzzer runtime, so use Homebrew LLVM:</p>
 <div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>llvm
@@ -1429,8 +1428,7 @@ make<span class="w"> </span>fuzz<span class="w"> </span><span class="nv">FUZZ_CC
 <h2 id="correctness-under-approximation">Correctness under approximation<a class="headerlink" href="#correctness-under-approximation" title="Permanent link">&para;</a></h2>
 <p><code>add_floats</code> is approximate (IEEE-754 rounding). All float comparisons go
 through <code>addlib.testing.approx_equal</code> with one documented tolerance, so
-"correct" has a single meaning — the discipline a CKKS-style approximate library
-needs, in miniature.</p>
+"correct" has a single, precise meaning across the suite.</p>
 <h2 id="benchmarks">Benchmarks<a class="headerlink" href="#benchmarks" title="Permanent link">&para;</a></h2>
 <p><code>benchmarks/bench_addition.py</code> tracks per-call cost with <code>pytest-benchmark</code>;
 the nightly job stores the JSON so trends are visible over time.</p>

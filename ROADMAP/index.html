@@ -27,7 +27,7 @@
     
     
       
-        <title>Roadmap mapping - addlib</title>
+        <title>Project tour - addlib</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#roadmap-mapping" class="md-skip">
+        <a href="#project-tour-roadmap" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Roadmap mapping
+              Project tour
             
           </span>
         </div>
@@ -1106,7 +1106,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1124,7 +1124,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap mapping
+    Project tour
   
 
     
@@ -1150,10 +1150,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-each-phase-produced" class="md-nav__link">
+  <a href="#whats-included" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What each phase produced
+        What's included
       
     </span>
   </a>
@@ -1161,10 +1161,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-one-ordering-the-roadmap-insists-on" class="md-nav__link">
+  <a href="#a-principle-worth-keeping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The one ordering the roadmap insists on
+        A principle worth keeping
       
     </span>
   </a>
@@ -1244,10 +1244,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-each-phase-produced" class="md-nav__link">
+  <a href="#whats-included" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What each phase produced
+        What's included
       
     </span>
   </a>
@@ -1255,10 +1255,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-one-ordering-the-roadmap-insists-on" class="md-nav__link">
+  <a href="#a-principle-worth-keeping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The one ordering the roadmap insists on
+        A principle worth keeping
       
     </span>
   </a>
@@ -1296,81 +1296,70 @@
   
 
 
-<h1 id="roadmap-mapping">Roadmap mapping<a class="headerlink" href="#roadmap-mapping" title="Permanent link">&para;</a></h1>
-<p><code>addlib</code> is a worked example of the
-VERIFHE library roadmap (the open-source-library design document this repo
-accompanies). This page maps each roadmap <strong>phase</strong> to the concrete artifacts in this
-repository, and sketches a forward roadmap.</p>
-<h2 id="what-each-phase-produced">What each phase produced<a class="headerlink" href="#what-each-phase-produced" title="Permanent link">&para;</a></h2>
+<h1 id="project-tour-roadmap">Project tour &amp; roadmap<a class="headerlink" href="#project-tour-roadmap" title="Permanent link">&para;</a></h1>
+<p><code>addlib</code> is a template for a native (C + Python) open-source library. This page
+maps the <strong>lifecycle areas</strong> of such a project to the concrete files here, so you
+can see where each concern lives — and what's planned next.</p>
+<h2 id="whats-included">What's included<a class="headerlink" href="#whats-included" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Phase</th>
-<th>In the roadmap</th>
+<th>Area</th>
 <th>In <code>addlib</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>0 — Foundations</strong></td>
-<td>License, governance, security intake, CoC, contribution basis</td>
+<td><strong>Foundations</strong></td>
 <td><a href="https://github.com/rosualinpetru/addlib/blob/main/LICENSE"><code>LICENSE</code></a> (Apache-2.0), <a href="https://github.com/rosualinpetru/addlib/blob/main/NOTICE"><code>NOTICE</code></a>, <a href="https://github.com/rosualinpetru/addlib/blob/main/GOVERNANCE.md"><code>GOVERNANCE.md</code></a>, <a href="https://github.com/rosualinpetru/addlib/blob/main/SECURITY.md"><code>SECURITY.md</code></a>, <a href="https://github.com/rosualinpetru/addlib/blob/main/CODE_OF_CONDUCT.md"><code>CODE_OF_CONDUCT.md</code></a>, <a href="https://github.com/rosualinpetru/addlib/blob/main/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> (DCO)</td>
 </tr>
 <tr>
-<td><strong>1 — Architecture</strong></td>
-<td>C/Python boundary, modules, artifact decision, design doc</td>
+<td><strong>Architecture</strong></td>
 <td><code>c/</code> core + <code>add.h</code> ABI, CFFI binding, <code>addlib</code> API, <a href="../explanation/design/">design doc</a>, <a href="../adr/">ADRs</a></td>
 </tr>
 <tr>
-<td><strong>2 — Infra &amp; CI/CD</strong></td>
-<td>CI, cross-platform wheels, dev env, SBOM</td>
+<td><strong>Build &amp; CI</strong></td>
 <td><code>pyproject.toml</code>/<code>setup.py</code>, <code>cibuildwheel</code>, <code>Makefile</code>, devcontainer, <code>ci.yml</code>/<code>wheels.yml</code>, Dependabot</td>
 </tr>
 <tr>
-<td><strong>3 — Testing</strong></td>
-<td>Pyramid, KATs, negative tests, fuzzing, benchmarks</td>
-<td>unit/property/KAT/negative/ABI tests, libFuzzer target with a 128-bit oracle, <code>pytest-benchmark</code>, nightly Valgrind</td>
+<td><strong>Testing</strong></td>
+<td>unit/property/known-answer/negative/ABI tests, libFuzzer target with a 128-bit oracle, <code>pytest-benchmark</code>, nightly Valgrind</td>
 </tr>
 <tr>
-<td><strong>4 — Security</strong></td>
-<td>Secure-by-construction, supply chain, disclosure, audit</td>
+<td><strong>Security</strong></td>
 <td><a href="../explanation/security-model/">security model</a>, <a href="../explanation/disclosure-runbook/">disclosure runbook</a>, CodeQL, OpenSSF Scorecard, dependency review</td>
 </tr>
 <tr>
-<td><strong>5 — Releases</strong></td>
-<td>SemVer, automated signed releases, channels</td>
+<td><strong>Releases</strong></td>
 <td><a href="../explanation/versioning/">versioning</a>, <a href="../changelog/"><code>CHANGELOG.md</code></a>, <code>release.yaml</code> (SBOM + provenance + Sigstore + Trusted Publishing)</td>
 </tr>
 <tr>
-<td><strong>6 — Docs &amp; site</strong></td>
-<td>Diátaxis, docs-as-code, website</td>
+<td><strong>Docs &amp; site</strong></td>
 <td>this MkDocs Material site, <code>README.md</code>, <code>CITATION.cff</code>, runnable examples</td>
 </tr>
 <tr>
-<td><strong>7 — Community</strong></td>
-<td>On-ramp, channels, RFCs</td>
-<td>issue/PR templates, this roadmap, <a href="https://github.com/rosualinpetru/addlib/tree/main/docs/rfcs">RFC template</a></td>
+<td><strong>Community</strong></td>
+<td>issue/PR templates, this page, <a href="https://github.com/rosualinpetru/addlib/tree/main/docs/rfcs">RFC template</a></td>
 </tr>
 <tr>
-<td><strong>8 — Maintenance</strong></td>
-<td>Bus factor, ADRs, sustainability</td>
-<td>ADRs + design doc as release-blocking artifacts, <a href="https://github.com/rosualinpetru/addlib/blob/main/MAINTAINERS.md"><code>MAINTAINERS.md</code></a>, this page</td>
+<td><strong>Maintenance</strong></td>
+<td>ADRs + design doc as release-blocking artifacts, <a href="https://github.com/rosualinpetru/addlib/blob/main/MAINTAINERS.md"><code>MAINTAINERS.md</code></a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="the-one-ordering-the-roadmap-insists-on">The one ordering the roadmap insists on<a class="headerlink" href="#the-one-ordering-the-roadmap-insists-on" title="Permanent link">&para;</a></h2>
+<h2 id="a-principle-worth-keeping">A principle worth keeping<a class="headerlink" href="#a-principle-worth-keeping" title="Permanent link">&para;</a></h2>
 <p>Testing and security tooling belong at the <strong>front</strong> of the timeline, not the
 end. In <code>addlib</code> the test suite, fuzzer, sanitizers, and supply-chain workflows
-existed before any "feature" beyond <code>add</code> — exactly the roadmap's argument that
-for a correctness-critical library, testing <em>is</em> the security argument.</p>
+existed before there was more than one function — for a correctness-critical
+library, the tests <em>are</em> the argument.</p>
 <h2 id="forward-roadmap-illustrative">Forward roadmap (illustrative)<a class="headerlink" href="#forward-roadmap-illustrative" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>0.2</strong> — a saturating/wrapping <code>add</code> variant (seeds the <em>experimental</em> tier),
   behind a clearly-marked import.</li>
 <li><strong>0.3</strong> — vectorized addition over buffers (NumPy protocol); may justify a
   second published Python artifact.</li>
-<li><strong>0.x → 1.0</strong> — stabilize the API; reach <code>1.0</code> aligned with a (hypothetical)
-  external review, per <a href="../explanation/versioning/">versioning</a>.</li>
+<li><strong>0.x → 1.0</strong> — stabilize the API; reach <code>1.0</code> when the public surface can be
+  promised, per <a href="../explanation/versioning/">versioning</a>.</li>
 <li><strong>C library</strong> — publish <code>libadd</code> to conda-forge / vcpkg if and when C
   consumers ask (demand-driven).</li>
 </ul>
