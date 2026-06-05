@@ -10,6 +10,24 @@ hand-curated — auto-generated lists alone make poor release notes.
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-06-05
+
+### Added
+- Wheels for more targets: Linux **aarch64** (built under QEMU) and **musllinux**
+  (x86_64), and **macOS x86_64** alongside Apple Silicon.
+- Test coverage in CI (pytest-cov) with optional Codecov upload; README status
+  badges (CI, Docs, Scorecard, coverage, license).
+- Changelog automation via **git-cliff** (`make changelog`) and a one-command
+  version bump (`make bump V=X.Y.Z`).
+- A conda-forge recipe (`recipe/meta.yaml`) and submission guide.
+
+### Changed
+- **Single source of truth for the version**: the top-level `VERSION` file drives
+  the Python distribution version; the C library version lives in `add.h`; a test
+  asserts they agree. No more version strings scattered across files.
+- Release publish is idempotent (`skip-existing`), so re-running a tag no longer
+  fails on already-uploaded files.
+
 ## [0.1.1] — 2026-06-05
 
 ### Changed
@@ -41,6 +59,7 @@ hand-curated — auto-generated lists alone make poor release notes.
   ([security policy](https://github.com/rosualinpetru/addlib/blob/main/SECURITY.md));
   disclosure runbook documented.
 
-[Unreleased]: https://github.com/rosualinpetru/addlib/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/rosualinpetru/addlib/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/rosualinpetru/addlib/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/rosualinpetru/addlib/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/rosualinpetru/addlib/releases/tag/v0.1.0

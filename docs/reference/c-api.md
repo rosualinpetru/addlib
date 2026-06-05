@@ -44,14 +44,14 @@ exception is raised.
 const char *add_version(void);
 ```
 
-Returns the version string (e.g. `"0.1.1"`) with static storage duration; do not
+Returns the version string (e.g. `"0.2.0"`) with static storage duration; do not
 free it.
 
 ## Versioning macros
 
 ```c
 #define ADDLIB_VERSION_MAJOR  0
-#define ADDLIB_VERSION_MINOR  1
-#define ADDLIB_VERSION_PATCH  1
-#define ADDLIB_VERSION_STRING "0.1.1"
+#define ADDLIB_VERSION_MINOR  2
+#define ADDLIB_VERSION_PATCH  0
+#define ADDLIB_VERSION_STRING "0.2.0"
 ```

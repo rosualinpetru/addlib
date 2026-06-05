@@ -14,15 +14,19 @@ changelog).
 
 ## Release checklist
 
-1. Ensure `main` is green and the [changelog](https://github.com/rosualinpetru/addlib/blob/main/CHANGELOG.md) `Unreleased`
-   section reflects what is shipping.
-2. Bump the version in **both** places that must agree:
-   - `pyproject.toml` → `version`
-   - `c/include/add/add.h` → `ADDLIB_VERSION_*` / `ADDLIB_VERSION_STRING`
-   (`test_version_consistency` and `test_version_symbol` fail if they drift.)
-3. Move `Unreleased` → `[X.Y.Z] — DATE` in the changelog; add the compare link.
-4. Commit (`-s`, signed): `git commit -S -s -m "chore(release): vX.Y.Z"`.
-5. Tag and push: `git tag -s vX.Y.Z -m "vX.Y.Z" && git push --tags`.
+1. Ensure `main` is green.
+2. Bump the version with one command:
+   ```bash
+   make bump V=X.Y.Z
+   ```
+   This writes the single source of truth — the top-level `VERSION` file (the
+   Python distribution version) — and the C library version in
+   `c/include/add/add.h`. A test (`test_version_consistency`) fails if the two
+   ever drift.
+3. Update the changelog (`make changelog` regenerates it from Conventional
+   Commits via git-cliff; or hand-edit `CHANGELOG.md`).
+4. Commit (`-s` for DCO): `git commit -s -m "chore(release): vX.Y.Z"`.
+5. Tag and push: `git tag -a vX.Y.Z -m "vX.Y.Z" && git push origin vX.Y.Z`.
 
 ## What the tag triggers (`release.yaml`)
 
@@ -45,7 +49,8 @@ those out-of-band).
 
 - **PyPI** — wheels + sdist, from day one.
 - **GitHub Releases** — canonical home for signed artifacts, SBOM, checksums.
-- **conda-forge** — add a feedstock around the first stable release; much of the
-  scientific-Python audience lives in conda and won't build native extensions by
-  hand. (Demand-driven; not set up yet.)
+- **conda-forge** — much of the scientific-Python audience lives in conda and
+  won't build native extensions by hand. A ready-to-adapt recipe is in
+  [`recipe/meta.yaml`](https://github.com/rosualinpetru/addlib/blob/main/recipe/meta.yaml);
+  submission steps are in [`recipe/README.md`](https://github.com/rosualinpetru/addlib/blob/main/recipe/README.md). (Demand-driven; not yet submitted.)
 - **vcpkg / Conan** for `libadd` — only if/when C consumers ask. Don't pre-build.

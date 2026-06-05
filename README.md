@@ -1,5 +1,11 @@
 # addlib
 
+[![CI](https://github.com/rosualinpetru/addlib/actions/workflows/ci.yml/badge.svg)](https://github.com/rosualinpetru/addlib/actions/workflows/ci.yml)
+[![Docs](https://github.com/rosualinpetru/addlib/actions/workflows/docs.yml/badge.svg)](https://github.com/rosualinpetru/addlib/actions/workflows/docs.yml)
+[![codecov](https://codecov.io/gh/rosualinpetru/addlib/branch/main/graph/badge.svg)](https://codecov.io/gh/rosualinpetru/addlib)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/rosualinpetru/addlib/badge)](https://securityscorecards.dev/viewer/?uri=github.com/rosualinpetru/addlib)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 > A small, complete example of a **Python library backed by a C core** through a
 > CFFI ABI — and a **batteries-included template** for building, testing,
 > securing, packaging, and releasing a native (C + Python) open-source library.
