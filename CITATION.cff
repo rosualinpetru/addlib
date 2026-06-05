@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use addlib, please cite it as below."
+title: "addlib: a worked example of an open-source C+Python library"
+abstract: >-
+  A minimal library that adds two numbers in C and exposes the result to Python
+  via a CFFI ABI, built as an end-to-end worked example of the VERIFHE
+  open-source cryptographic-library roadmap.
+type: software
+authors:
+  - family-names: Roșu
+    given-names: Alin-Petru
+    email: rosualinpetru@gmail.com
+version: "0.1.0"
+date-released: "2026-06-04"
+license: Apache-2.0
+repository-code: "https://github.com/rosualinpetru/addlib"
+url: "https://rosualinpetru.github.io/addlib"
+keywords:
+  - cffi
+  - c-extension
+  - packaging
+  - open-source
+  - verifhe
