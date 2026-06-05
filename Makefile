@@ -36,20 +36,18 @@ test-c: ## Build and run the C tests via CMake/CTest
 	cmake --build $(BUILD)
 	ctest --test-dir $(BUILD) --output-on-failure
 
-lint: ## Lint C and Python (clang-format/-tidy, ruff, mypy)
+C_SOURCES := c/src/*.c c/include/add/*.h c/tests/*.c c/fuzz/*.c c/bench/*.c examples/*.c
+
+lint: ## Lint C and Python (clang-format, ruff, mypy)
 	$(VENV_PY) -m ruff check .
 	$(VENV_PY) -m ruff format --check .
 	$(VENV_PY) -m mypy
-	@command -v clang-format >/dev/null 2>&1 \
-		&& clang-format --dry-run --Werror c/src/*.c c/include/add/*.h c/tests/*.c c/fuzz/*.c \
-		|| echo "clang-format not installed; skipping C format check"
+	$(VENV)/bin/clang-format --dry-run --Werror $(C_SOURCES)
 
 fmt: ## Auto-format C and Python
 	$(VENV_PY) -m ruff format .
 	$(VENV_PY) -m ruff check --fix .
-	@command -v clang-format >/dev/null 2>&1 \
-		&& clang-format -i c/src/*.c c/include/add/*.h c/tests/*.c c/fuzz/*.c \
-		|| echo "clang-format not installed; skipping C format"
+	$(VENV)/bin/clang-format -i $(C_SOURCES)
 
 bench: ## Run benchmarks
 	$(VENV_PY) -m pytest benchmarks --benchmark-only
