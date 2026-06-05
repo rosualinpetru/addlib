@@ -14,7 +14,7 @@ repository, and sketches a forward roadmap.
 | **2 — Infra & CI/CD** | CI, cross-platform wheels, dev env, SBOM | `pyproject.toml`/`setup.py`, `cibuildwheel`, `Makefile`, devcontainer, `ci.yml`/`wheels.yml`, Dependabot |
 | **3 — Testing** | Pyramid, KATs, negative tests, fuzzing, benchmarks | unit/property/KAT/negative/ABI tests, libFuzzer target with a 128-bit oracle, `pytest-benchmark`, nightly Valgrind |
 | **4 — Security** | Secure-by-construction, supply chain, disclosure, audit | [security model](explanation/security-model.md), [disclosure runbook](explanation/disclosure-runbook.md), CodeQL, OpenSSF Scorecard, dependency review |
-| **5 — Releases** | SemVer, automated signed releases, channels | [versioning](explanation/versioning.md), [`CHANGELOG.md`](changelog.md), `release.yml` (SBOM + provenance + Sigstore + Trusted Publishing) |
+| **5 — Releases** | SemVer, automated signed releases, channels | [versioning](explanation/versioning.md), [`CHANGELOG.md`](changelog.md), `release.yaml` (SBOM + provenance + Sigstore + Trusted Publishing) |
 | **6 — Docs & site** | Diátaxis, docs-as-code, website | this MkDocs Material site, `README.md`, `CITATION.cff`, runnable examples |
 | **7 — Community** | On-ramp, channels, RFCs | issue/PR templates, this roadmap, [RFC template](https://github.com/rosualinpetru/addlib/tree/main/docs/rfcs) |
 | **8 — Maintenance** | Bus factor, ADRs, sustainability | ADRs + design doc as release-blocking artifacts, [`MAINTAINERS.md`](https://github.com/rosualinpetru/addlib/blob/main/MAINTAINERS.md), this page |

@@ -5,7 +5,7 @@
 name: Wheels
 
 on:
-  # Tagged releases are handled by release.yml; this workflow is for PR smoke
+  # Tagged releases are handled by release.yaml; this workflow is for PR smoke
   # builds and manual runs only.
   workflow_dispatch:
   pull_request:
