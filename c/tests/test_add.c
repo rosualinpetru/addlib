@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-/* Copyright 2026 Alin-Petru Roșu */
+/* Copyright 2026 Alin-Petru Rosu */
 /* Minimal dependency-free C test harness, run under CTest (and ASan/UBSan in CI). */
 
 #include "add/add.h"

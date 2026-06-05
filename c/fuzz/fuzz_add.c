@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-/* Copyright 2026 Alin-Petru Roșu */
+/* Copyright 2026 Alin-Petru Rosu */
 /*
  * libFuzzer target for add_i64. Build with:
  *   cmake -S . -B build -DADDLIB_BUILD_FUZZERS=ON -DCMAKE_C_COMPILER=clang

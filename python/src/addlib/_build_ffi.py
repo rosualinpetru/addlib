@@ -83,10 +83,14 @@ def _read_text(path: str) -> str:
 # keeps the wheel self-contained and side-steps that entirely; the header is still
 # resolved via include_dirs, and the standalone libadd CMake build compiles the
 # very same add.c, so there is no duplicated implementation.
+# include_dirs is given as an ABSOLUTE path: unlike `sources` it is not subject
+# to setuptools' relative-path check, and an absolute -I resolves regardless of
+# the compiler's working directory (a relative include dir can fail to find the
+# header under MSVC on Windows — C1083).
 ffibuilder.set_source(
     "addlib._add_cffi",
     _read_text(os.path.join(_C, "src", "add.c")),
-    include_dirs=[os.path.join(_C, "include")],
+    include_dirs=[os.path.abspath(os.path.join(_C, "include"))],
 )
 
 if __name__ == "__main__":
