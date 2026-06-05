@@ -52,7 +52,7 @@ assert approx_equal(add_floats(0.1, 0.2), 0.3)
 
 ```python
 import addlib
-print(addlib.__version__, addlib.c_version())   # 0.1.0 0.1.0
+print(addlib.__version__, addlib.c_version())   # 0.1.1 0.1.1
 ```
 
 The Python package and the native core report the same version — a test enforces

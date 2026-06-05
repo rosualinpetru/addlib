@@ -25,7 +25,7 @@ __all__ = [
 try:
     __version__ = metadata.version("addlib")
 except metadata.PackageNotFoundError:  # imported from a source tree, not installed
-    __version__ = "0.1.0"
+    __version__ = "0.1.1"
 
 # Signed 64-bit bounds. We validate at the Python boundary so callers get a
 # clear AdditionOverflowError instead of a generic CFFI marshalling error.
