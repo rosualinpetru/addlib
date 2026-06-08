@@ -99,6 +99,10 @@ jobs:
         with:
           repository-url: https://test.pypi.org/legacy/
           skip-existing: true # don't fail if a file was already uploaded (e.g. tag re-run)
+          # We attest/sign separately (attest-build-provenance + sigstore steps),
+          # so disable the publish action's own PEP 740 attestation — it hits
+          # Sigstore's Rekor for every wheel and is a flaky failure surface.
+          attestations: false
       - name: Sign artifacts with Sigstore
         uses: sigstore/gh-action-sigstore-python@v3.0.0
         with:
