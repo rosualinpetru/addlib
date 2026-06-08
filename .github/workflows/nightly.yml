@@ -22,7 +22,8 @@ jobs:
           cmake -S . -B build -DADDLIB_BUILD_FUZZERS=ON -DCMAKE_C_COMPILER=clang
           cmake --build build --target fuzz_add
       - name: Fuzz for 120s
-        run: ./build/fuzz_add -max_total_time=120 -print_final_stats=1
+        # CMake builds the executable under build/c/ (add_subdirectory(c)).
+        run: ./build/c/fuzz_add -max_total_time=120 -print_final_stats=1
       - name: Upload crashers (if any)
         if: failure()
         uses: actions/upload-artifact@v4
@@ -32,13 +33,15 @@ jobs:
 
   valgrind:
     name: Valgrind (memcheck) on C tests
-    runs-on: ubuntu-latest
+    # Pinned to 22.04: Valgrind reports libc false positives against glibc 2.39 on 24.04.
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y valgrind
       - run: cmake -S . -B build -DADDLIB_BUILD_TESTS=ON
       - run: cmake --build build
-      - run: valgrind --error-exitcode=1 --leak-check=full --track-origins=yes ./build/test_add
+      # CMake builds the executable under build/c/ (add_subdirectory(c)).
+      - run: valgrind --error-exitcode=1 --leak-check=full --track-origins=yes ./build/c/test_add
 
   benchmarks:
     name: Benchmark trend
