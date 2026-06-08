@@ -2,98 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://rosualinpetru.github.io/addlib/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/ROADMAP/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/changelog/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/adr/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/adr/0001-license-apache-2.0/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/adr/0002-cffi-binding/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/adr/0003-monorepo-two-artifacts/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/adr/0004-build-backend/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/anti-patterns/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/design/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/disclosure-runbook/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/maintenance/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/releasing/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/security-model/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/testing/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/explanation/versioning/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/how-to/codecov/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/how-to/handling-overflow/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/how-to/use-libadd-from-c/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/reference/c-api/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/reference/python-api/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/rfcs/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/rfcs/0000-template/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://rosualinpetru.github.io/addlib/tutorials/getting-started/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
 </urlset>
