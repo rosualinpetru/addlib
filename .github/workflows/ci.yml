@@ -22,8 +22,8 @@ jobs:
     name: Lint (C + Python)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install Python dev deps (incl. pinned clang-format)
@@ -46,8 +46,8 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python: ["3.10", "3.11", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
       - name: Install (builds the CFFI extension)
@@ -56,7 +56,7 @@ jobs:
         run: pytest -q --cov=addlib --cov-report=xml --cov-report=term-missing
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v7
         with:
           files: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }} # add this secret (see docs/how-to/codecov.md)
@@ -66,7 +66,7 @@ jobs:
     name: C tests + ASan/UBSan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Configure (with sanitizers)
         run: >
           cmake -S . -B build -DADDLIB_BUILD_TESTS=ON
@@ -80,8 +80,8 @@ jobs:
     name: Build sdist + wheel
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Build distributions
@@ -94,7 +94,7 @@ jobs:
         run: |
           python -m pip install dist/*.whl
           cd /tmp && python -c "import addlib; assert addlib.add(2, 3) == 5; print('wheel OK', addlib.__version__)"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: dist-smoke
           path: dist/*
